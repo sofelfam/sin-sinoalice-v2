@@ -1,4 +1,4 @@
-# SIN-SINoALICE
+# SIN - SINoALICE
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6ef47689-c7fe-4e9b-b47a-76ee9c0a899f/deploy-status)](https://app.netlify.com/sites/sin-sinoalice/deploys)
 

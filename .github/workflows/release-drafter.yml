@@ -3,7 +3,7 @@ on:
   push:
     branches:
       # branches to consider in the event; optional, defaults to all
-      - master
+      - main
 
 jobs:
   update_release_draft:

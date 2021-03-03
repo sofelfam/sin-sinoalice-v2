@@ -20,6 +20,7 @@ const siteMetadata = {
 };
 
 export default {
+  pathPrefix: "/sin-sinoalice-v2",
   siteMetadata,
   plugins: [
     `gatsby-plugin-emotion`,
