@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://sin-sinoalice.netlify.app//sitemap.xml
+Host: https://sin-sinoalice.netlify.app
