@@ -1,22 +1,21 @@
-const siteTitle = `Gatsby Starter hpp`;
-const siteUrl = `https://gatsby-starter-hpp.netlify.com`;
-const siteDescription = `simple gatsby starter with mdx, typescript, pwa`;
+const siteTitle = `SIN - SINoALICE`;
+const siteUrl = `https://sin-sinoalice.netlify.app/`;
+const siteDescription = `Tools for SINoALICE`;
 const backgroundColor = `#09090f`;
-const themeColor = `#09090f`;
+const themeColor = `#3f51b5`;
 
 const siteMetadata = {
   siteTitle,
-  siteTitleAlt: `Gatsby Starter hpp - @hppRC/gatsby-starter-hpp`,
-  siteHeadline: `Gatsby Starter hpp - Gatsby Starter from @hppRC`,
+  siteTitleAlt: `SIN - SINoALICE`,
+  siteHeadline: `SIN - SINoALICE - Tools for SINoALICE from @sofelfam`,
   siteUrl,
   siteDescription,
-  siteLanguage: `en`,
-  author: `@hpp_ricecake`, // twitter account id
+  siteLanguage: `jp`,
+  author: `@sofelfam`, // twitter account id
   basePath: `/`,
   social: {
-    twitter: `https://twitter.com/hpp_ricecake`,
-    github: `https://github.com/hppRC`,
-    qiita: `https://qiita.com/hppRC`,
+    twitter: `https://twitter.com/sofelfam`,
+    github: `https://github.com/sofelfam`,
   },
 };
 
@@ -32,7 +31,6 @@ export default {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-root-import`,
-    `gatsby-plugin-offline`,
     `gatsby-plugin-lodash`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -83,7 +81,7 @@ export default {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         // replace "UA-XXXXXXXXX-X" with your own Tracking ID
-        trackingId: `UA-149661454-1`,
+        //trackingId: `UA-XXXXXXXXX-X`,
       },
     },
     // gatsby-plugin-manifest should be described before gatsby-plugin-offline

@@ -1,4 +1,5 @@
 import 'sanitize.css';
+import 'tailwindcss/dist/base.css'
 import 'src/styles/static-global.scss';
 
 import { WrapPageElement, WrapRootElement } from '../src/components';

@@ -88,7 +88,7 @@ const SEO: React.FCX<Props> = ({ title = ``, description = ``, pathname = ``, im
     social,
   } = metadata;
 
-  const { twitter, github, qiita } = social || {};
+  const { twitter, github } = social || {};
 
   const seo = {
     title: title || defaultTitle,
@@ -110,7 +110,7 @@ const SEO: React.FCX<Props> = ({ title = ``, description = ``, pathname = ``, im
         height: 60,
       },
       url: siteUrl,
-      sameAs: [twitter, github, qiita],
+      sameAs: [twitter, github],
     },
     {
       '@type': `thing`,

@@ -46,7 +46,6 @@ export default (): SiteMetadata => {
           social {
             twitter
             github
-            qiita
           }
         }
       }

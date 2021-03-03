@@ -1,32 +1,15 @@
-# gatsby-starter-hpp
+# SIN-SINoALICE
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bbee222e-f232-452e-b6ba-d58f6c1af937/deploy-status)](https://app.netlify.com/sites/gatsby-starter-hpp/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6ef47689-c7fe-4e9b-b47a-76ee9c0a899f/deploy-status)](https://app.netlify.com/sites/sin-sinoalice/deploys)
 
-![](https://github.com/hppRC/gatsby-starter-hpp/workflows/Lint/badge.svg)
+![](https://github.com/sofelfam/sin-sinoalice-v2/workflows/Lint/badge.svg)
 
-![](https://github.com/hppRC/gatsby-starter-hpp/workflows/Build%20project%20and%20Run%20Lighthouse%20CI/badge.svg)
+![](https://github.com/sofelfam/sin-sinoalice-v2/workflows/Build%20project%20and%20Run%20Lighthouse%20CI/badge.svg)
 
-![](https://github.com/hppRC/gatsby-starter-hpp/workflows/GitHub%20Pages/badge.svg)
+![](https://github.com/sofelfam/sin-sinoalice-v2/workflows/GitHub%20Pages/badge.svg)
 
-simplest gatsby skelton.
+This is **fan-made** SINoALICE Progressive Web App.
 
-## Recomendation
+## WIP / To do list
 
-- node.js  
-   `version: 14.0.0`
-- yarn  
-   `version: 1.22.4`
-
-## Get Started
-
-1. install node modules
-
-```
-$ yarn
-```
-
-2. start development server
-
-```
-$ yarn start
-```
+- [x] Switching projects

@@ -1,17 +1,22 @@
 import React from 'react';
+import { css } from '@emotion/core';
+import tw from 'twin.macro';
 
-import styled from '@emotion/styled';
+interface FooterProps {
+  className?: string,
+  open: boolean,
+  drawerWidth: number,
+}
 
-const Component: React.FCX = ({ className }) => (
-  <footer className={className}>Copyright © 2020 hppRC All Rights Reserved.</footer>
-);
+const Footer = (props: FooterProps) => {
 
-const StyledComponent = styled(Component)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 10vh;
-`;
+return(
+  <div css={[tw`flex w-full h-20 justify-center items-center
+            transition transition-locate ease-out`,
+            props.open ? css`margin-left: ${props.drawerWidth}px; width: calc(100% - ${props.drawerWidth}px)` : tw`ml-0`]}
+  >
+    <footer>Footer</footer>
+  </div>
+)};
 
-export default StyledComponent;
+export default Footer;

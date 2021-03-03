@@ -17,7 +17,7 @@ const StyledComponent = styled(Component)`
 
 export default ({ path }: { path: string }): JSX.Element => (
   <>
-    <SEO title='Top' pathname={path} />
+    <SEO pathname={path} />
     <StyledComponent />
   </>
 );
