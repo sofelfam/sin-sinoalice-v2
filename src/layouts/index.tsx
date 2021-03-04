@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import tw, { GlobalStyles } from 'twin.macro'
 import { css } from '@emotion/core';
-import tw from 'twin.macro';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -32,26 +32,29 @@ export const Layout: React.FC = ({ children }) => {
 
 return(
   <>
-    <div tw="dark:bg-gray-800 dark:text-gray-200">
-      <div tw="flex">
-        <Header
-          drawerWidth={drawerWidth}
-          open={open}
-          handleDrawerChange={handleDrawerChange}
-        />
-        
-        <div css={[tw`pt-28 flex-grow lg:px-6
-                      transition transition-spacing ease-out`,
-                  open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`]}
-        >
-          {children}
-        </div>
+  <div>
+    <GlobalStyles />
+      <div tw="dark:bg-gray-800 dark:text-gray-200">
+        <div tw="flex">
+          <Header
+            drawerWidth={drawerWidth}
+            open={open}
+            handleDrawerChange={handleDrawerChange}
+          />
           
+          <div css={[tw`pt-28 flex-grow lg:px-6
+                        transition transition-spacing ease-out`,
+                    open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`]}
+          >
+            {children}
+          </div>
+            
+        </div>
+        <Footer
+          open={open}
+          drawerWidth={drawerWidth}
+        />
       </div>
-      <Footer
-        open={open}
-        drawerWidth={drawerWidth}
-      />
     </div>
   </>
 )};
