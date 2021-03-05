@@ -8,4 +8,8 @@ This is **fan-made** SINoALICE Progressive Web App.
 
 ## WIP / To do list
 
-- [x] Switching projects
+- [ ] Rebuilding projects
+-- [ ] PWA UI
+-- [ ] **Pages**: calc/combo
+-- [ ] **Pages**: calc/lifeforce
+-- [ ] **Pages**: calc/timer
