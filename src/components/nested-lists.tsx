@@ -15,7 +15,6 @@ interface ChildListsProps {
 }
 
 interface NestedListsProps {
-    className?: string;
     topIcon: JSX.Element;
     topText: string;
     lists: { icon: JSX.Element, text: string, link?: string }[];
@@ -44,30 +43,34 @@ const ChildLists = React.memo((props: ChildListsProps) => {
  * @returns {JSX.Element} Nested list elements
  */
 const Component = React.memo((props: NestedListsProps) => {
+  const { topIcon, topText, lists, ...rest } = props;
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
   const nodeStyle = useMemo(
     () => ({
-      maxHeight: open ? `${props.lists.length * 5}rem` : 0,
+      maxHeight: open ? `${lists.length * 5}rem` : 0,
     }), [open]
   );
 
   return (
     <>
-      <div className={props.className}>
+      <button
+        tw='focus:outline-none focus-visible:ring-2 text-left'
+        onClick={handleClick}
+        {...rest}
+      >
         <IconList
-          onClick={handleClick}
-          icon={props.topIcon}
-          text={props.topText}
+          icon={topIcon}
+          text={topText}
           endIcon={open ? <ChevronUp size='small' /> : <ChevronDown size='small' />}
         />
 
         <div style={nodeStyle} css={classes.nestedWrapper}>
-          <ChildLists lists={props.lists} />
+          <ChildLists lists={lists} />
         </div>
-      </div>
+      </button>
     </>
   );
 });

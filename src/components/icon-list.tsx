@@ -19,17 +19,14 @@ const classes = {
 };
 
 interface ListsProps {
-  className?: string;
   icon: JSX.Element;
   text: string;
   endIcon?: JSX.Element;
   link?: string;
   nested?: boolean;
-  onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
 }
 
 /**
- * @param {string} className className
  * @param {JSX.Element} icon svg element
  * @param {string} text list title
  * @param {JSX.Element?} endIcon? svg element
@@ -37,10 +34,10 @@ interface ListsProps {
  */
 const IconList = (props: ListsProps) => {
   let wrapper;
-  const { className, icon, text, endIcon, link, nested, ...other } = props;
+  const { icon, text, endIcon, link, nested, ...other } = props;
   if (link) {
     wrapper = (
-      <div className={className} {...other}>
+      <div {...other}>
         <Link to={link} css={[classes.list, nested ? classes.nestedList : tw``]}>
           <div css={classes.listIcon}>{icon}</div>
           <div css={classes.listText}>{text}</div>
@@ -51,7 +48,6 @@ const IconList = (props: ListsProps) => {
   } else {
     wrapper = (
       <div
-        className={props.className}
         css={[classes.list, nested ? classes.nestedList : tw``]}
         {...other}
       >
@@ -64,7 +60,7 @@ const IconList = (props: ListsProps) => {
 
   return (
     <>{wrapper}</>
-  )
+  );
 };
 
 export default IconList;

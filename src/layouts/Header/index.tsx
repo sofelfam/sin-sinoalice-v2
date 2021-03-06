@@ -24,7 +24,7 @@ const Header = (props: HeaderProps): JSX.Element => {
             css={[tw`flex min-h-22 bg-indigo-800 justify-start items-center px-6`,
             props.open ? tw`w-full` : tw`w-screen`]}
           >
-            <button tw='p-4 mr-4 rounded-full cursor-pointer hover:bg-hover fucus-visible:ring transition'
+            <button tw='p-4 mr-4 rounded-full cursor-pointer hover:bg-focus focus:outline-none focus-visible:ring-2 transition'
               aria-label='open drawer'
               onClick={() => handleDrawerChange()}
             >

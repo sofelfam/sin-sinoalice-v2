@@ -8,7 +8,7 @@ import { ToggleDarkMode } from 'src/components/toggleDarkMode';
 
 const classes = {
   listHeader: tw`
-    sticky z-10 -top-px px-4 leading-20 font-bold bg-white dark:bg-gray-800 font-sans
+    sticky z-10 -top-px px-4 leading-20 font-bold bg-clip-padding bg-gray-50 dark:bg-gray-800 font-sans
   `,
 };
 
@@ -33,7 +33,7 @@ const Header = (props: drawerProps): JSX.Element => {
           <div tw='text-lg text-gray-500'>v0.0.1</div>
         </div>
         <button
-          tw='p-4 rounded-full cursor-pointer hover:bg-hover dark:hover:bg-darkhover focus-visible:ring transition transition-background'
+          tw='p-4 rounded-full cursor-pointer hover:bg-hover dark:hover:bg-darkhover focus:outline-none focus-visible:ring-2 transition transition-background'
           onClick={() => handleDrawerChange()}
         >
           <svg tw='w-8 h-8' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -136,7 +136,7 @@ const Header = (props: drawerProps): JSX.Element => {
       <Divider />
       <div tw='flex p-3 justify-between'>
         <button
-          tw='p-4 rounded-full cursor-pointer hover:bg-hover dark:hover:bg-darkhover focus-visible:ring transition transition-background'
+          tw='p-4 rounded-full cursor-pointer hover:bg-hover dark:hover:bg-darkhover focus:outline-none focus-visible:ring-2 transition transition-background'
           onClick={() => handleDrawerChange()}
         >
           <svg tw='w-8 h-8' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
