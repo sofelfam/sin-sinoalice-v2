@@ -16,16 +16,16 @@ const classes = {
   listText: tw`
     flex-auto min-w-0 my-1
   `,
-}
+};
 
 interface ListsProps {
-  className?: string, 
-  icon: JSX.Element,
-  text: string,
-  endIcon?: JSX.Element,
-  link?: string,
-  nested?: boolean,
-  onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined,
+  className?: string;
+  icon: JSX.Element;
+  text: string;
+  endIcon?: JSX.Element;
+  link?: string;
+  nested?: boolean;
+  onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
 }
 
 /**
@@ -35,37 +35,36 @@ interface ListsProps {
  * @param {JSX.Element?} endIcon? svg element
  * @returns {JSX.Element} List element
  */
-const IconList = ((props: ListsProps) => {
+const IconList = (props: ListsProps) => {
   let wrapper;
   const { className, icon, text, endIcon, link, nested, ...other } = props;
-  if(link){
-    wrapper = <>
-                <div className={className} {...other}>
-                  <Link to={link} css={[classes.list,
-                                        nested ? classes.nestedList : classes.list]}>
-                    <div css={classes.listIcon}>{icon}</div>
-                    <div css={classes.listText}>{text}</div>
-                    {endIcon && <div tw="inline-flex">{endIcon}</div>}
-                  </Link>
-                </div>
-              </>;
+  if (link) {
+    wrapper = (
+      <div className={className} {...other}>
+        <Link to={link} css={[classes.list, nested ? classes.nestedList : tw``]}>
+          <div css={classes.listIcon}>{icon}</div>
+          <div css={classes.listText}>{text}</div>
+          {endIcon && <div tw='inline-flex'>{endIcon}</div>}
+        </Link>
+      </div>
+    );
   } else {
-    wrapper = <>
-                <div className={props.className} {...other}
-                    css={[classes.list,
-                          nested ? classes.nestedList : classes.list]}>
-                  <div css={classes.listIcon}>{icon}</div>
-                  <div css={classes.listText}>{text}</div>
-                  {endIcon && <div tw="inline-flex">{endIcon}</div>}
-                </div>
-              </>;
+    wrapper = (
+      <div
+        className={props.className}
+        css={[classes.list, nested ? classes.nestedList : tw``]}
+        {...other}
+      >
+        <div css={classes.listIcon}>{icon}</div>
+        <div css={classes.listText}>{text}</div>
+        {endIcon && <div tw='inline-flex'>{endIcon}</div>}
+      </div>
+    );
   }
 
   return (
-    <>
-      {wrapper}
-    </>
+    <>{wrapper}</>
   )
-});
+};
 
 export default IconList;

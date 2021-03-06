@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ChevronUp, ChevronDown } from 'src/components/icons'
+import { ChevronUp, ChevronDown } from 'src/components/icons';
 import tw from 'twin.macro';
 import IconList from './icon-list';
 
@@ -8,33 +8,33 @@ const classes = {
     flex flex-col min-h-0 overflow-hidden
     transition duration-200 transition-height
   `,
-}
+};
 
 interface ChildListsProps {
-  lists: {icon: JSX.Element, text: string, link?: string}[]
+  lists: { icon: JSX.Element, text: string, link?: string }[]
 }
 
 interface NestedListsProps {
-    className?: string,
-    topIcon: JSX.Element,
-    topText: string,
-    lists: {icon: JSX.Element, text: string, link?: string}[]
-}
+    className?: string;
+    topIcon: JSX.Element;
+    topText: string;
+    lists: { icon: JSX.Element, text: string, link?: string }[];
+};
 
 const ChildLists = React.memo((props: ChildListsProps) => {
-  return(
+  return (
     <>
       {props.lists.map((list, key) => (
         <IconList
           nested={true}
-          key={key}
+          key={`nested-list-${key}`}
           icon={list.icon}
           text={list.text}
           link={list.link}
         />
       ))}
     </>
-  )
+  );
 });
 
 /**
@@ -52,7 +52,7 @@ const Component = React.memo((props: NestedListsProps) => {
     () => ({
       maxHeight: open ? `${props.lists.length * 5}rem` : 0,
     }), [open]
-  )
+  );
 
   return (
     <>
@@ -61,7 +61,7 @@ const Component = React.memo((props: NestedListsProps) => {
           onClick={handleClick}
           icon={props.topIcon}
           text={props.topText}
-          endIcon={open ? <ChevronUp size="small" /> : <ChevronDown size="small" />}
+          endIcon={open ? <ChevronUp size='small' /> : <ChevronDown size='small' />}
         />
 
         <div style={nodeStyle} css={classes.nestedWrapper}>
@@ -69,7 +69,7 @@ const Component = React.memo((props: NestedListsProps) => {
         </div>
       </div>
     </>
-  )
+  );
 });
 
 export default Component;

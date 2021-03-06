@@ -67,15 +67,16 @@ module.exports = {
         '12': '3rem',
         '16': '4rem',
         '20': '5rem',
-       },
+      },
       spacing: {
       },
-    }
+    },
   },
   variants: {
     extend: {
+      textDecoration: ['focus-visible'],
       transitionProperty: ['hover', 'focus'],
     },
   },
   plugins: [],
-}
+};
