@@ -9,7 +9,8 @@ This is **fan-made** SINoALICE Progressive Web App.
 ## WIP / To do list
 
 - [ ] Rebuilding projects
-  - [ ] PWA UI
-  - [ ] **Pages**: calc/combo
+  - [ ] PWA UI (Responsive UI)
+  - [ ] Top / About / History / Contact / Credits pages
+  - [x] **Pages**: calc/combo
   - [ ] **Pages**: calc/lifeforce
   - [ ] **Pages**: calc/timer

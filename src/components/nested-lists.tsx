@@ -15,9 +15,9 @@ interface ChildListsProps {
 }
 
 interface NestedListsProps {
-    topIcon: JSX.Element;
-    topText: string;
-    lists: { icon: JSX.Element, text: string, link?: string }[];
+  topIcon: JSX.Element;
+  topText: string;
+  lists: { icon: JSX.Element, text: string, link?: string }[];
 };
 
 const ChildLists = React.memo((props: ChildListsProps) => {
@@ -58,7 +58,7 @@ const Component = React.memo((props: NestedListsProps) => {
     <>
       <button
         tw='focus:outline-none focus-visible:ring-2 text-left'
-        onClick={handleClick}
+        onClick={() => handleClick()}
         {...rest}
       >
         <IconList

@@ -1,14 +1,14 @@
 import React from 'react';
+import tw from 'twin.macro';
 import { Link } from 'gatsby';
 import { css } from '@emotion/core';
 import { SwordIcon, ChartIcon } from 'src/components/icons';
 import { Divider, IconList, NestedLists } from 'src/components';
-import tw from 'twin.macro';
 import { ToggleDarkMode } from 'src/components/toggleDarkMode';
 
 const classes = {
   listHeader: tw`
-    sticky z-10 -top-px px-4 leading-20 font-bold bg-clip-padding bg-gray-50 dark:bg-gray-800 font-sans
+    sticky z-10 -top-px pb-px leading-20 font-bold bg-clip-content bg-gray-50 dark:bg-gray-800 font-sans
   `,
 };
 
@@ -21,16 +21,16 @@ interface drawerProps {
 const Header = (props: drawerProps): JSX.Element => {
   const { drawerWidth, open, handleDrawerChange } = props;
   return(
-    <nav css={[tw`fixed top-0 left-0 right-auto flex flex-col flex-auto h-full outline-none z-50 overflow-y-auto border border-solid border-gray-400 dark:border-gray-50 transition ease-out`,
+    <nav css={[tw`fixed top-0 left-0 right-auto flex flex-col flex-auto h-full outline-none z-50 overflow-y-auto border-r border-solid border-gray-400 dark:border-gray-50 transition ease-out`,
       css`width: ${drawerWidth}px`,
       open ? tw`transform-none` : css`transform: translateX(-${drawerWidth}px); visibility: hidden;`]}
     >
       <div tw='flex py-0 px-3 min-h-22 items-center justify-between'>
         <div tw='ml-2'>
-          <div tw='text-gray-700'>
+          <div tw='text-gray-700 dark:text-gray-50'>
             <Link to='/' tw='no-underline'>SIN - SINoALICE</Link>
           </div>
-          <div tw='text-lg text-gray-500'>v0.0.1</div>
+          <div tw='text-lg text-gray-500 dark:text-gray-400'>v0.0.1</div>
         </div>
         <button
           tw='p-4 rounded-full cursor-pointer hover:bg-hover dark:hover:bg-darkhover focus:outline-none focus-visible:ring-2 transition transition-background'
@@ -42,7 +42,7 @@ const Header = (props: drawerProps): JSX.Element => {
         </button>
       </div>
       <Divider />
-      <div css={classes.listHeader}>Calculators</div>
+      <div css={classes.listHeader}><span tw='pl-6'>Calculators</span></div>
       <NestedLists
         topIcon={<SwordIcon />}
         topText={`ダメージ計算`}
@@ -84,7 +84,7 @@ const Header = (props: drawerProps): JSX.Element => {
         link={'/calc/ship'}
       />
       <Divider />
-      <div css={classes.listHeader}>Simulators</div>
+      <div css={classes.listHeader}><span tw='pl-6'>Simulators</span></div>
       <IconList
         icon={<ChartIcon />}
         text={`前衛装備`}
@@ -106,7 +106,7 @@ const Header = (props: drawerProps): JSX.Element => {
         link={'/'}
       />
       <Divider />
-      <div css={classes.listHeader}>Generators</div>
+      <div css={classes.listHeader}><span tw='pl-6'>Generators</span></div>
       <IconList
         icon={<ChartIcon />}
         text={`装備画像`}
