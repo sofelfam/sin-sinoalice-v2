@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { css } from '@emotion/core';
 import tw from 'twin.macro';
 import DrawerList from './drawer-list';
+import { SwitchTitle } from 'src/store';
 
 interface HeaderProps {
   drawerWidth: number;
@@ -12,6 +13,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps): JSX.Element => {
   const { drawerWidth, open, handleDrawerChange } = props;
+  const { title } = SwitchTitle.useContainer();
   return (
     <>
       <div>
@@ -33,10 +35,8 @@ const Header = (props: HeaderProps): JSX.Element => {
               </svg>
             </button>
 
-            <div tw='flex-grow'>
-              <Link to='/' tw='text-white no-underline'>
-                SIN - SINoALICE
-              </Link>
+            <div tw='flex-grow text-white'>
+              {title}
             </div>
           </div>
         </div>

@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NetlifyForm, SEO } from 'src/components';
+import { css } from '@emotion/core';
 import { baseStyle } from 'src/styles';
+import { SwitchTitle } from 'src/store';
 
-import styled from '@emotion/styled';
+const Component = ({ path }: { path: string }): JSX.Element => {
+  const { setTitle } = SwitchTitle.useContainer();
+  useEffect(() => {
+    setTitle('Contact');
+  }, []);
 
-const Component: React.FCX = ({ className }) => (
-  <main className={className}>
-    <h1>Contact</h1>
-    <NetlifyForm />
-  </main>
-);
+  return (
+    <>
+      <SEO title='Contact' pathname={path} />
+      <main css={css`${baseStyle}`}>
+        <NetlifyForm />
+      </main>
+    </>
+  )
+};
 
-const StyledComponent = styled(Component)`
-  ${baseStyle}
-`;
-
-export default ({ path }: { path: string }): JSX.Element => (
-  <>
-    <SEO title='Contact' pathname={path} />
-    <StyledComponent />
-  </>
-);
+export default Component;

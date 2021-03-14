@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AnyImage, SEO } from 'src/components';
+import { css } from '@emotion/core';
 import { baseStyle } from 'src/styles';
+import { SwitchTitle } from 'src/store';
 
-import styled from '@emotion/styled';
+const Component = ({ path }: { path: string }): JSX.Element => {
+  const { setTitle } = SwitchTitle.useContainer();
+  useEffect(() => {
+    setTitle('SIN - SINoALICE');
+  }, []);
 
-const Component: React.FCX = ({ className }) => (
-  <main className={className}>
-    <h1>this is Component page!</h1>
-    <AnyImage filename='banner.png' />
-  </main>
-);
+  return (
+    <>
+      <SEO pathname={path} />
+      <main css={css`${baseStyle}`}>
+        <h1>this is Component page!</h1>
+        <AnyImage filename='banner.png' />
+      </main>
+    </>
+  );
+};
 
-const StyledComponent = styled(Component)`
-  ${baseStyle}
-`;
-
-export default ({ path }: { path: string }): JSX.Element => (
-  <>
-    <SEO pathname={path} />
-    <StyledComponent />
-  </>
-);
+export default Component;

@@ -4,7 +4,7 @@
 
 ![](https://github.com/sofelfam/sin-sinoalice-v2/workflows/Lint/badge.svg)　[![GitHub Pages](https://github.com/sofelfam/sin-sinoalice-v2/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/sofelfam/sin-sinoalice-v2/actions/workflows/gh-pages.yml) [![Last Commit](https://img.shields.io/github/last-commit/sofelfam/sin-sinoalice-v2)](https://github.com/sofelfam/sin-sinoalice-v2/commits/main)
 
-This is **fan-made** SINoALICE Progressive Web App.
+This is a **fan-made** SINoALICE Progressive Web App built with GatsbyJS and TailwindCSS.
 
 ## WIP / To do list
 

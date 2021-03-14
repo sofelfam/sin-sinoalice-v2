@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SEO } from 'src/components';
 import { css } from '@emotion/core';
 import { baseStyle } from 'src/styles';
+import { SwitchTitle } from 'src/store';
 import TimerTable from './timer-table';
 
-const Timer = ({ path }: { path: string }): JSX.Element => {
+const Component = ({ path }: { path: string }): JSX.Element => {
+  const { setTitle } = SwitchTitle.useContainer();
+  useEffect(() => {
+    setTitle('コロシアムタイマー');
+  }, []);
   
   return(
     <>
       <SEO title='コロシアムタイマー' pathname={path} />
       <main css={css`${baseStyle}`}>
-        <h1>コロシアムタイマー</h1>
         <TimerTable />
       </main>
     </>
   );
 };
 
-export default Timer;
+export default Component;

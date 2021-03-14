@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'src/layouts';
-import { SwitchContainer } from 'src/store';
+import { SwitchTitle } from 'src/store';
 
 import styled from '@emotion/styled';
 
@@ -9,9 +9,9 @@ type Props = ContainerProps;
 
 // you can use this component for some providers for redux, context API, etc...
 const Component: React.FCX<Props> = ({ element }) => (
-  <SwitchContainer.Provider>
+  <SwitchTitle.Provider>
     <Layout>{element}</Layout>
-  </SwitchContainer.Provider>
+  </SwitchTitle.Provider>
 );
 
 const StyledComponent = styled(Component)``;

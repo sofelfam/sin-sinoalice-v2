@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SEO } from 'src/components';
+import { css } from '@emotion/core';
 import { baseStyle } from 'src/styles';
+import { SwitchTitle } from 'src/store';
 
-import styled from '@emotion/styled';
+const Component = ({ path }: { path: string }): JSX.Element => {
+  const { setTitle } = SwitchTitle.useContainer();
+  useEffect(() => {
+    setTitle('Not Found');
+  }, []);
 
-const Component: React.FCX = ({ className }) => (
-  <main className={className}>
-    <h1>Not Found</h1>
-  </main>
-);
+  return (
+    <>
+      <SEO title='Not Found' pathname={path} />
+      <main css={css`${baseStyle}`}>
+        <h1>Page Not Found...</h1>
+      </main>
+    </>
+  )
+};
 
-const StyledComponent = styled(Component)`
-  ${baseStyle}
-`;
-
-export default ({ path }: { path: string }): JSX.Element => (
-  <>
-    <SEO title='Not Found' pathname={path} />
-    <StyledComponent />
-  </>
-);
+export default Component;

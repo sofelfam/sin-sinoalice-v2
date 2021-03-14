@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SEO } from 'src/components';
 import { css } from '@emotion/core';
 import { baseStyle } from 'src/styles';
+import { SwitchTitle } from 'src/store';
 import ComboTable from './combo-table';
 
-const ComboCalc = ({ path }: { path: string }): JSX.Element => {
+const Component = ({ path }: { path: string }): JSX.Element => {
+  const { setTitle } = SwitchTitle.useContainer();
+  useEffect(() => {
+    setTitle('コンボ計算機');
+  }, []);
   
   return(
     <>
       <SEO title='コンボ計算機' pathname={path} />
       <main css={css`${baseStyle}`}>
-        <h1>コンボ計算機</h1>
         <ComboTable />
       </main>
     </>
   );
 };
 
-export default ComboCalc;
+export default Component;

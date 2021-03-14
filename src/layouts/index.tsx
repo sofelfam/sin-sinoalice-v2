@@ -9,10 +9,9 @@ const drawerWidth = 240;
 
 export const Layout: React.FC = ({ children }) => {
   const [open, setOpen] = useState(false);
-  // const mobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   useEffect(() => {
-    setOpen(Boolean(localStorage.getItem(`drawer`) === `open`));
+    setOpen(localStorage.getItem(`drawer`) === `open`);
   }, []);
 
   const handleDrawerChange = () => {

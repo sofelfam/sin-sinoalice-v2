@@ -132,7 +132,7 @@ const Header = (props: drawerProps): JSX.Element => {
         <IconList
           icon={<ChartIcon />}
           text={`Contact`}
-          link={'/'}
+          link={'/contact'}
         />
         <IconList
           icon={<ChartIcon />}
