@@ -6,7 +6,7 @@ import NightmareTabs from "./nightmare-tabs";
 
 interface timerSettingTableProps {
   triggers: string[];
-  handleTriggers: (event: React.MouseEvent<HTMLElement>, newTriggers: string[]) => void;
+  handleTriggers: (e: React.ChangeEvent<HTMLInputElement>, newTriggers: string[]) => void;
   optButtonDisabled: boolean;
   startButtonDisabled: boolean;
   handleShinmaButton: () => void;
@@ -60,6 +60,18 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
     setMessageInfo(undefined);
   };
 
+  const handleToggleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (triggers.includes(e.target.value)) {
+      handleTriggers(e, triggers.filter(function(a) { return a !== e.target.value; }));
+    } else {
+      handleTriggers(e, triggers.concat(e.target.value));
+    }
+  }
+
+  const toggleCheck = (value: string):boolean => {
+    return triggers.includes(value);
+  }
+
   const handleShinmaButtonWithSnack = () => {
     handleShinmaButton();
     handleSnackbarOpen("神魔効果タイマー開始。", "info");
@@ -96,9 +108,12 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
                 <input
                   type='checkbox'
                   id='trigger-5s'
+                  value='5s'
                   tw='w-16 h-16 box-border appearance-none cursor-pointer transition ease focus:outline-none focus-visible:ring border border-gray-400
                     hover:bg-focus checked:bg-disabled dark:checked:bg-darkhover
                     rounded-l-md'
+                  onChange={(e) => handleToggleChange(e)}
+                  checked={toggleCheck('5s')}
                 />
                 <div tw='absolute left-0 top-0 w-full h-full -z-1'>
                   <AnyImage filename='images/cards/CardS5975.png' />
@@ -107,10 +122,13 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
               <div tw='relative h-16 rounded-r-md overflow-hidden'>
                 <input
                   type='checkbox'
-                  id='trigger-5s'
+                  id='trigger-90s'
+                  value='90s'
                   tw='w-16 h-16 box-border appearance-none cursor-pointer transition ease focus:outline-none focus-visible:ring border border-gray-400
                     hover:bg-focus checked:bg-disabled dark:checked:bg-darkhover
                     rounded-r-md border-l-0'
+                  onChange={(e) => handleToggleChange(e)}
+                  checked={toggleCheck('90s')}
                 />
                 <div tw='absolute left-0 top-0 w-full h-full -z-1'>
                   <AnyImage filename='images/cards/CardS7549.png' />

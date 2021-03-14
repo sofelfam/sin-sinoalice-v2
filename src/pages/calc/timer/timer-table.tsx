@@ -44,7 +44,7 @@ const ColoTimerTable = () => {
 
   //トリガーボタン情報
   const [triggers, setTriggers] = useState<string[]>([]);
-  const handleTriggers = (_event: React.MouseEvent<HTMLElement>, newTriggers: string[]) => {
+  const handleTriggers = (_event: React.ChangeEvent<HTMLInputElement>, newTriggers: string[]) => {
     setTriggers(newTriggers);
   };
 
