@@ -4,6 +4,13 @@ import TimerDisplayTable from './timerDisplay-table';
 import TimerHistoryTable from './timerHistory-table';
 import TimerSettingTable from './timerSetting-table';
 
+export interface historyProps {
+  id: string;
+  nowText: string;
+  readyText: string;
+  endText: string;
+}
+
 const ColoTimerTable = () => {
   const nowZeroDate = (): Date => {
     const now = new Date();
@@ -54,7 +61,7 @@ const ColoTimerTable = () => {
   const [optButtonDisabled, setOptButtonDisabled] = useState<boolean>(true);
 
   //メア履歴
-  const [history, setHistory] = useState<string[][]>([]);
+  const [history, setHistory] = useState<historyProps[]>([]);
 
   useEffect(() => {
     const startTime = getCloseColoTime();    
@@ -320,7 +327,7 @@ const ColoTimerTable = () => {
     const countText_ready = getTimeText(getEndDate(mareTimeRef.current[0] * -1 - 1, leftTimeRef.current));
     const countText_end = getTimeText(getEndDate((mareTimeRef.current[0] + mareTimeRef.current[1]) * -1 - 1, leftTimeRef.current));
 
-    setHistory(history => [...history, [tempId, countText_now, countText_ready, countText_end]]);
+    setHistory(history => [...history, {id: tempId, nowText: countText_now, readyText: countText_ready, endText: countText_end}]);
   }
 
   return(

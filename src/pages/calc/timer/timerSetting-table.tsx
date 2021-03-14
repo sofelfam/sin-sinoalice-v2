@@ -71,7 +71,7 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
   }
 
   const toggleCheck = (value: string):boolean => {
-    return triggers.has(value);
+    return (triggers || new Set()).has(value);
   }
 
   const handleShinmaButtonWithSnack = () => {

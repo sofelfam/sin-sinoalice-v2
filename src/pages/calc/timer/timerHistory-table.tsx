@@ -2,6 +2,7 @@ import React from "react";
 import { AnyImage } from "src/components";
 import { Trash } from "src/components/icons";
 import tw from 'twin.macro';
+import { historyProps } from "./timer-table";
 
 const classes = {
   headerCell: tw`
@@ -13,18 +14,18 @@ const classes = {
 }
 
 interface timerHistoryProps {
-  history: string[][];
-  setHistory: React.Dispatch<React.SetStateAction<string[][]>>;
+  history: historyProps[];
+  setHistory: React.Dispatch<React.SetStateAction<historyProps[]>>;
 }
 
-const TimerHistoryTable = (props: timerHistoryProps) => {
+const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProps) => {
   const { history, setHistory } = props;
 
   const handleDeleteAllButton = () => {
     setHistory([]);
   }
   
-  const handleDeleteButton = (row: string[]) => {
+  const handleDeleteButton = (row: historyProps) => {
     setHistory(history.filter(x => x !== row));
   }
 
@@ -53,14 +54,14 @@ const TimerHistoryTable = (props: timerHistoryProps) => {
             </tr>
           </thead>
           <tbody>
-            {history.map((row: string[], index: number) => (
+            {(history || []).map((row: historyProps, index: number) => (
               <tr key={`history-${index}`}>
                 <td tw='w-20 h-20'>
-                  <AnyImage filename={`images/cards/CardS${('0000' + row[0]).slice(-4)}.png`} />
+                  <AnyImage filename={`images/cards/CardS${('0000' + row.id).slice(-4)}.png`} />
                 </td>
-                <td css={[classes.cell]}>{row[1].slice(3,8)}</td>
-                <td css={[classes.cell]}>{row[2].slice(3,8)}</td>
-                <td css={[classes.cell]}>{row[3].slice(3,8)}</td>
+                <td css={[classes.cell]}>{row.nowText.slice(3,8)}</td>
+                <td css={[classes.cell]}>{row.readyText.slice(3,8)}</td>
+                <td css={[classes.cell]}>{row.endText.slice(3,8)}</td>
                 <td>
                   <button
                     tw='h-12 w-12 bg-rose-600 text-white rounded-md px-2 py-1 sm:px-2 sm:py-1 sm:m-2 transition ease select-none hover:bg-rose-800 focus:outline-none focus-visible:ring'

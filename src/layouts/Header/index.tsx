@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import { css } from '@emotion/core';
 import tw from 'twin.macro';
 import DrawerList from './drawer-list';
