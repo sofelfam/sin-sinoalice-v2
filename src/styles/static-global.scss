@@ -32,6 +32,12 @@ html {
     pointer-events: none;
   }
 
+  h2 {
+    color: rgba(107, 114, 128, 1);
+    background: linear-gradient(transparent 85%, rgba(30, 64, 175, .4) 95%);
+    margin-bottom: .9rem;
+  }
+
   h6 {
     font-size: 0.75em;
     color: rgba(107, 114, 128, 1);

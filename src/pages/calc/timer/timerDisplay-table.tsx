@@ -1,4 +1,5 @@
 import React from "react";
+import { AnyImage } from "src/components";
 import tw from 'twin.macro';
 
 const classes = {
@@ -25,6 +26,7 @@ interface timerTableProps {
 
 const TimerTable = (props: timerTableProps) => {
   const { coloCountText, coloMareId, coloMareStartTime, coloMareEndTime } = props;
+  const imageId = ('0000' + coloMareId).slice(-4);
 
   return(
     <div css={[classes.timerDisplayTable]}>
@@ -41,6 +43,7 @@ const TimerTable = (props: timerTableProps) => {
           <div tw='flex'>
             <div tw='w-20 h-20 my-1'>
               <div data-id={coloMareId} />
+              <AnyImage filename={`images/cards/CardS${imageId}.png`} />
             </div>
             <div>
               <div tw='flex' >

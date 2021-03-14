@@ -5,8 +5,8 @@ import { Trash } from "src/components/icons";
 import NightmareTabs from "./nightmare-tabs";
 
 interface timerSettingTableProps {
-  triggers: string[];
-  handleTriggers: (e: React.ChangeEvent<HTMLInputElement>, newTriggers: string[]) => void;
+  triggers: Set<string>;
+  setTriggers:  React.Dispatch<React.SetStateAction<Set<string>>>;
   optButtonDisabled: boolean;
   startButtonDisabled: boolean;
   handleShinmaButton: () => void;
@@ -19,7 +19,7 @@ interface timerSettingTableProps {
 };
 
 const TimerSettingTable = (props: timerSettingTableProps) => {
-  const { triggers, handleTriggers, optButtonDisabled, startButtonDisabled, handleShinmaButton, handleStartButton, handleRestartButton, handleShorteningButton, handleMinusButton, handleClearButton, handleNightmareButton } = props;
+  const { triggers, setTriggers, optButtonDisabled, startButtonDisabled, handleShinmaButton, handleStartButton, handleRestartButton, handleShorteningButton, handleMinusButton, handleClearButton, handleNightmareButton } = props;
 
   //ボタントリガーアラート
   interface SnackbarMessage {
@@ -61,15 +61,17 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
   };
 
   const handleToggleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (triggers.includes(e.target.value)) {
-      handleTriggers(e, triggers.filter(function(a) { return a !== e.target.value; }));
+    const newSet = new Set(triggers);
+    if (newSet.has(e.target.value)) {
+      newSet.delete(e.target.value);
     } else {
-      handleTriggers(e, triggers.concat(e.target.value));
+      newSet.add(e.target.value);
     }
+    setTriggers(newSet);
   }
 
   const toggleCheck = (value: string):boolean => {
-    return triggers.includes(value);
+    return triggers.has(value);
   }
 
   const handleShinmaButtonWithSnack = () => {

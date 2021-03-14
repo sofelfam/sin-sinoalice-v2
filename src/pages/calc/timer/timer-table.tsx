@@ -15,27 +15,27 @@ const ColoTimerTable = () => {
   }
 
   //コロシアム残り時間
-  const [coloCount, setColoCount] = useState(new Date);
+  const [coloCount, setColoCount] = useState<Date>(new Date);
   const coloCountDownRef = useRef<NodeJS.Timeout | null>(null);
   //発動残り時間
-  const [readyCount, setReadyCount] = useState(nowZeroDate());
+  const [readyCount, setReadyCount] = useState<Date>(nowZeroDate());
   const readyCountDownRef = useRef<NodeJS.Timeout | null>(null);
   //効果残り時間
-  const [mareCount, setMareCount] = useState(nowZeroDate());
+  const [mareCount, setMareCount] = useState<Date>(nowZeroDate());
   const mareCountDownRef = useRef<NodeJS.Timeout | null>(null);
   //タイマーが起動しているかの判定
-  const [startActivate, setStartActivate] = useState(false);
+  const [startActivate, setStartActivate] = useState<boolean>(false);
   //発動・効果タイミング
-  const [coloMareTime, setColoMareTime] = useState([nowZeroDate(), nowZeroDate()]);
+  const [coloMareTime, setColoMareTime] = useState<Date[]>([nowZeroDate(), nowZeroDate()]);
   //メアID
-  const [mareId, setMareId] = useState("0465");
+  const [mareId, setMareId] = useState<string>('0465');
   //神魔残り時間
   const [shinmaCount, setShinmaCount] = useState(nowZeroDate());
   const shinmaCountDownRef = useRef<NodeJS.Timeout | null>(null);
   //神魔終了タイミング
-  const [shinmaEndTime, setShinmaEndTime] = useState(nowZeroDate())
+  const [shinmaEndTime, setShinmaEndTime] = useState<Date>(nowZeroDate())
   
-  //メア時間保持
+  //メアの準備,効果時間保持
   const mareTimeRef = useRef<number[] | null>(null);
   //タイマー測定開始時間保持
   const readyRef = useRef<Date | null>(null);
@@ -43,14 +43,18 @@ const ColoTimerTable = () => {
   const leftTimeRef = useRef<Date | null>(null);
 
   //トリガーボタン情報
-  const [triggers, setTriggers] = useState<string[]>([]);
-  const handleTriggers = (_event: React.ChangeEvent<HTMLInputElement>, newTriggers: string[]) => {
-    setTriggers(newTriggers);
-  };
-
+  const [triggers, setTriggers] = useState(new Set<string>());
+  const clearTriggers = () => {
+    triggers.clear();
+    setTriggers(new Set<string>());
+  }
+ 
   //ボタンDisabled
-  const [startButtonDisabled, setStartButtonDisabled] = useState(false);
-  const [optButtonDisabled, setOptButtonDisabled] = useState(true);
+  const [startButtonDisabled, setStartButtonDisabled] = useState<boolean>(false);
+  const [optButtonDisabled, setOptButtonDisabled] = useState<boolean>(true);
+
+  //メア履歴
+  const [history, setHistory] = useState<string[][]>([]);
 
   useEffect(() => {
     const startTime = getCloseColoTime();    
@@ -63,50 +67,50 @@ const ColoTimerTable = () => {
 
   const [audio, setAudio] = useState<HTMLAudioElement[]>();
   useEffect(() => {
-    setAudio([new Audio("../../static/sounds/cursor2.mp3"),
-              new Audio("../../static/sounds/warning1.mp3")])
+    setAudio([new Audio('../../static/sounds/cursor2.mp3'),
+              new Audio('../../static/sounds/warning1.mp3')])
   }, []);
 
   const getCloseColoTime = (): Date => {
     var now = new Date();
-    var time = Number(now.getHours() + "" + ("0" + now.getMinutes()).slice(-2));
+    var time = Number(now.getHours() + '' + ('0' + now.getMinutes()).slice(-2));
 
     if (coloCountDownRef.current !== null) clearTimeout(coloCountDownRef.current);
     var startTime;
     if (time <= 800) {
-      startTime = "8:00";
+      startTime = '8:00';
     } else if (time <= 1250) {
-      startTime = "12:30";
+      startTime = '12:30';
     } else if (time <= 1820) {
-      startTime = "18:00";
+      startTime = '18:00';
     } else if (time <= 1920) {
-      startTime = "19:00";
+      startTime = '19:00';
     } else if (time <= 2020) {
-      startTime = "20:00";
+      startTime = '20:00';
     } else if (time <= 2120) {
-      startTime = "21:00";
+      startTime = '21:00';
     } else if (time <= 2220) {
-      startTime = "22:00";
+      startTime = '22:00';
     } else if (time <= 2320) {
-      startTime = "23:00";
+      startTime = '23:00';
     } else {
-      startTime = "24:00";
+      startTime = '24:00';
     }
-    return getTimeDate(startTime + ":00:00");
+    return getTimeDate(startTime + ':00:00');
   }
 
   const getTimeText = (date: Date): string => {
     let hh, mm, ss, dd;
-    hh = ("0" + date.getHours()).slice(-2);
-    mm = ("0" + date.getMinutes()).slice(-2);
-    ss = ("0" + date.getSeconds()).slice(-2);
-    //dd =  (date.getMilliseconds() + "0").slice(0, 2);
+    hh = ('0' + date.getHours()).slice(-2);
+    mm = ('0' + date.getMinutes()).slice(-2);
+    ss = ('0' + date.getSeconds()).slice(-2);
+    //dd =  (date.getMilliseconds() + '0').slice(0, 2);
     dd = 0;
-    return hh + ":" + mm + ":" + ss + ":" + dd;
+    return hh + ':' + mm + ':' + ss + ':' + dd;
   }
 
   const getTimeDate = (dateValue: string): Date => {
-    const dateArray = dateValue.split(":");
+    const dateArray = dateValue.split(':');
 
     const date = new Date();
     date.setHours(Number(dateArray[0]));
@@ -177,7 +181,7 @@ const ColoTimerTable = () => {
       tick_tock(1);
       setStartButtonDisabled(false);
       setOptButtonDisabled(true);
-      setTriggers([]);
+      clearTriggers();
 
       if (mareCountDownRef.current !== null) clearInterval(mareCountDownRef.current);
       mareCountDownRef.current = null;
@@ -237,9 +241,8 @@ const ColoTimerTable = () => {
 
   const handleRestartButton = () => {
     //キマイラ、ウインゴ設置後起動メアに対して正常に動作しない（mareTimeRef.current[0]がそれになっている）
-    //設置型起動の場合、mareTime[2]に元の時間を保持、この部分のみで[2]チェック
+    //設置型起動の場合、mareTimeRef.current[2]に元の時間を保持、この部分のみで[2]チェック
     
-
     readyRef.current = new Date();
     setColoMareTime([getEndDate(-1-mareTimeRef.current[0], coloCount), getEndDate(-1-mareTimeRef.current[0]-mareTimeRef.current[1], coloCount)]);
     
@@ -271,6 +274,7 @@ const ColoTimerTable = () => {
     mareTimeRef.current = [0, 0];
     setStartActivate(false);
     setColoMareTime([initTime, initTime])
+    setMareId('0465');
  
     if (readyCountDownRef.current !== null) clearInterval(readyCountDownRef.current);
     readyCountDownRef.current = null;
@@ -279,7 +283,7 @@ const ColoTimerTable = () => {
     
     setStartButtonDisabled(false);
     setOptButtonDisabled(true);
-    setTriggers([]);
+    clearTriggers();
   }, []);
 
   const handleNightmareButton = (e: React.MouseEvent<HTMLElement>) => {
@@ -290,8 +294,8 @@ const ColoTimerTable = () => {
     }
     setStartActivate(true);
 
-    const mareReady = triggers.indexOf('90s') !== -1 ? 90 :
-                      triggers.indexOf('short') !== -1 ? 5 :
+    const mareReady = triggers.has('90s') ? 90 :
+                      triggers.has('5s') ? 5 :
                       e.currentTarget.dataset.ready === undefined ? 0 : +e.currentTarget.dataset.ready;
     const mareActivate = e.currentTarget.dataset.activate === undefined ? 0 : +e.currentTarget.dataset.activate;
     mareTimeRef.current = [mareReady, mareActivate];
@@ -299,7 +303,8 @@ const ColoTimerTable = () => {
     const mareStartDate = getEndDate(-1-mareTimeRef.current[0], leftTimeRef.current);
     const mareEndDate = getEndDate(-1-mareTimeRef.current[0]-mareTimeRef.current[1], leftTimeRef.current);
     setColoMareTime([mareStartDate, mareEndDate]);
-    setMareId(e.currentTarget.dataset.id === undefined ? "0465" : e.currentTarget.dataset.id);
+    const tempId = e.currentTarget.dataset.id === undefined ? '0465' : e.currentTarget.dataset.id;
+    setMareId(tempId);
     
     if (readyCountDownRef.current !== null) clearInterval(readyCountDownRef.current);
     readyCountDownRef.current = null;
@@ -311,19 +316,15 @@ const ColoTimerTable = () => {
     setStartButtonDisabled(true);
     setOptButtonDisabled(false);
 
-    /*  発動・効果タイミング
-    var countText_now = getTimeText(getEndDate(-1, last_time_act));
-    var countText_ready = getTimeText(getEndDate(ready * -1 - 1, last_time_act));
-    var countText_end = getTimeText(getEndDate((ready + activate) * -1 - 1, last_time_act));
+    const countText_now = getTimeText(getEndDate(-1, leftTimeRef.current));
+    const countText_ready = getTimeText(getEndDate(mareTimeRef.current[0] * -1 - 1, leftTimeRef.current));
+    const countText_end = getTimeText(getEndDate((mareTimeRef.current[0] + mareTimeRef.current[1]) * -1 - 1, leftTimeRef.current));
 
-    $("#next_icon").attr("src", "https://sinoalice.game-db.tw/images/card/CardS" + $(this).data("id") + ".png");
-    $("#next_ready").html(countText_ready);
-    $("#next_end").html(countText_end);
-    */
+    setHistory(history => [...history, [tempId, countText_now, countText_ready, countText_end]]);
   }
 
   return(
-    <div tw='flex'>
+    <div tw='flex lg:w-4/5 lg:mx-auto w-full mx-0'>
       <div tw='flex-grow flex flex-col'>
         <TimerDisplayTable
           coloCountText={getTimeText(coloCount).slice(0,8)}
@@ -337,7 +338,7 @@ const ColoTimerTable = () => {
         />
         <TimerSettingTable
           triggers={triggers}
-          handleTriggers={handleTriggers}
+          setTriggers={setTriggers}
           optButtonDisabled={optButtonDisabled}
           startButtonDisabled={startButtonDisabled}
           handleShinmaButton={handleShinmaButton}
@@ -349,8 +350,11 @@ const ColoTimerTable = () => {
           handleNightmareButton={handleNightmareButton}
         />
       </div>
-      <div tw='md:w-1/3 md:block w-0 hidden'>
-        <TimerHistoryTable />
+      <div tw='md:w-max md:ml-6 md:block w-0 ml-0 hidden'>
+        <TimerHistoryTable
+          history={history}
+          setHistory={setHistory}
+        />
       </div>
     </div>
   )
