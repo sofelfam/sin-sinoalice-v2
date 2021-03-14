@@ -35,7 +35,7 @@ const ComboInput = (props: comboInputProps): JSX.Element => {
 
   return (
     <div tw='flex flex-col'>
-      <label tw='text-lg'>{label}</label>
+      <label htmlFor={`${inputType}-${index}`} tw='text-lg'>{label}</label>
       <div tw='flex flex-row h-10 w-full rounded-lg relative bg-transparent'>
         <button
           id={`${inputType}-${index}-decrement`}
@@ -93,44 +93,47 @@ const ComboList: React.FCX<comboListProps> = (props: comboListProps) => {
                 <span tw='font-bold'>{list.combo5*1 + list.combo10*1 + list.combo0*1}</span>
               </div>
             </div>
-            <div tw='flex flex-row space-x-2'>
-              <ComboInput
-                inputType={'loop'}
-                label='周回数'
-                list={list}
-                index={index}
-                handleTextFieldChanges={handleTextFieldChanges}
-                handleSpinnerButton={handleSpinnerButton}
-              />
-              <ComboInput
-                inputType={'combo5'}
-                label='コンボ+5'
-                list={list}
-                index={index}
-                handleTextFieldChanges={handleTextFieldChanges}
-                handleSpinnerButton={handleSpinnerButton}
-              />
-              <ComboInput
-                inputType={'combo10'}
-                label='コンボ+10'
-                list={list}
-                index={index}
-                handleTextFieldChanges={handleTextFieldChanges}
-                handleSpinnerButton={handleSpinnerButton}
-              />
-              <ComboInput
-                inputType={'combo0'}
-                label='その他'
-                list={list}
-                index={index}
-                handleTextFieldChanges={handleTextFieldChanges}
-                handleSpinnerButton={handleSpinnerButton}
-              />
-              <div tw='flex items-center'>
+            <div tw='flex flex-row w-full sm:w-max justify-between'>
+              <div tw='flex flex-row space-x-2'>
+                <ComboInput
+                  inputType={'loop'}
+                  label='周回数'
+                  list={list}
+                  index={index}
+                  handleTextFieldChanges={handleTextFieldChanges}
+                  handleSpinnerButton={handleSpinnerButton}
+                />
+                <ComboInput
+                  inputType={'combo5'}
+                  label='コンボ+5'
+                  list={list}
+                  index={index}
+                  handleTextFieldChanges={handleTextFieldChanges}
+                  handleSpinnerButton={handleSpinnerButton}
+                />
+                <ComboInput
+                  inputType={'combo10'}
+                  label='コンボ+10'
+                  list={list}
+                  index={index}
+                  handleTextFieldChanges={handleTextFieldChanges}
+                  handleSpinnerButton={handleSpinnerButton}
+                />
+                <ComboInput
+                  inputType={'combo0'}
+                  label='その他'
+                  list={list}
+                  index={index}
+                  handleTextFieldChanges={handleTextFieldChanges}
+                  handleSpinnerButton={handleSpinnerButton}
+                />
+              </div>
+              <div tw='flex items-center ml-2 md:ml-8 lg:ml-16'>
                 <button
                   type="button"
+                  aria-label='Duplicate'
                   id={`addButton-${index}`}
-                  tw="flex items-center border border-indigo-500 bg-indigo-500 text-white rounded-md p-1 sm:px-4 sm:py-2 m-1 sm:m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:ring"
+                  tw="flex items-center bg-lightblue-500 text-white rounded-md p-1 sm:px-4 sm:py-2 m-1 sm:m-2 transition ease select-none hover:bg-lightblue-700 focus:outline-none focus:ring"
                   onClick={() => addlist([list.combo5, list.combo10, list.combo0, list.loop])}
                 >
                   <DuplicateIcon />
@@ -138,28 +141,29 @@ const ComboList: React.FCX<comboListProps> = (props: comboListProps) => {
                 </button>
                 <button
                   type="button"
+                  aria-label='Delete'
                   id={`deleteButton-${index}`}
-                  tw="flex items-center border border-red-500 bg-red-500 text-white rounded-md p-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:ring"
+                  tw="flex items-center bg-rose-600 text-white rounded-md p-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-rose-800 focus:outline-none focus:ring"
                   onClick={() => deletelist(list)}
                 >
                   <Trash />
                   <span tw='sm:ml-2 sm:block hidden'>削除</span>
                 </button>
               </div>
-              <div tw='absolute top-4 right-4 inline-block w-14 mr-2 align-middle select-none transition duration-200 ease-in'>
+              <div tw='absolute top-6 right-4 inline-block w-14 align-middle select-none transition duration-200 ease-in'>
                 <input
                   type='checkbox'
                   id={`validSwitch-${index}`}
                   checked={list.valid}
-                  tw='absolute block left-0 w-8 h-8 border-4  rounded-full appearance-none cursor-pointer focus:outline-none focus:ring
-                    border-gray-500 dark:border-white bg-gray-500 dark:bg-white
-                    checked:left-6 checked:border-green-500 dark:checked:border-green-300 checked:bg-green-500 dark:checked:bg-green-300
+                  tw='absolute block -top-1 left-0 w-8 h-8 border-4 rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring shadow-2xl
+                    border-gray-500 dark:border-white bg-gray-500 dark:bg-white hover:ring-8 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10
+                    checked:left-6 checked:border-green-500 dark:checked:border-green-300 checked:bg-green-500 dark:checked:bg-green-300 checked:ring-emerald-400 checked:ring-opacity-10
                     transition transition-locate'
                   onChange={() => handleSwitchChanges(list)}
                 />
                 <label
                   htmlFor={`validSwitch-${index}`}
-                  tw='block h-8 align-middle overflow-hidden text-gray-300 bg-gray-300 rounded-full cursor-pointer dark:text-gray-400 dark:bg-gray-400 dark:border-gray-400 border-gray-300 border-2'
+                  tw='block h-6 align-middle overflow-hidden text-gray-300 bg-gray-300 rounded-full cursor-pointer dark:text-gray-400 dark:bg-gray-400 dark:border-gray-400 border-gray-300 border-2'
                 >
                   valid
                 </label>
@@ -262,7 +266,7 @@ const ComboTable = () => {
           </div>
           <button
             type="button"
-            tw="flex items-center border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:ring"
+            tw="flex items-center bg-lightblue-500 text-white rounded-md px-4 py-2 m-2 transition ease select-none hover:bg-lightblue-700 focus:outline-none focus:ring"
             //startIcon={<AddCircleIcon />}
             onClick={() => addlist()}
           >

@@ -14,7 +14,7 @@ const ComboCalc = ({ path }: { path: string }): JSX.Element => {
         <ComboTable />
       </main>
     </>
-  )
+  );
 };
 
 export default ComboCalc;

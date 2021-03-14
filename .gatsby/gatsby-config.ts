@@ -10,7 +10,7 @@ const siteMetadata = {
   siteHeadline: `SIN - SINoALICE - Tools for SINoALICE from @sofelfam`,
   siteUrl,
   siteDescription,
-  siteLanguage: `jp`,
+  siteLanguage: `ja`,
   author: `@sofelfam`, // twitter account id
   basePath: `/`,
   social: {

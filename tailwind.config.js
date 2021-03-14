@@ -1,3 +1,5 @@
+const colors = require('twin.macro/node_modules/tailwindcss/colors')
+
 module.exports = {
   purge: ['./src/**/*.{js,ts,jsx,tsx}',
           './src/**/**/*.{js,ts,jsx,tsx}'],
@@ -24,6 +26,7 @@ module.exports = {
       primary: 'rgba(0, 0, 0, 0.87)',
       secondary: 'rgba(0, 0, 0, 0.54)',
       disabled: 'rgba(0, 0, 0, 0.38)',
+      active: 'rgba(0, 0, 0, 0.24)',
       focus: 'rgba(0, 0, 0, 0.12)',
       selected: 'rgba(0, 0, 0, 0.08)',
       hover: 'rgba(0, 0, 0, 0.04)',
@@ -65,6 +68,11 @@ module.exports = {
         default: '1px solid currentColor',
       },
       colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        emerald: colors.emerald,
+        lightblue: colors.lightBlue,
+        rose: colors.rose,
       },
       lineHeight: {
         '12': '3rem',
@@ -73,6 +81,9 @@ module.exports = {
       },
       spacing: {
       },
+      zIndex: {
+        '-1': '-1',
+      }
     },
   },
   variants: {

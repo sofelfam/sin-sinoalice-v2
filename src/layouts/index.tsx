@@ -25,12 +25,11 @@ export const Layout: React.FC = ({ children }) => {
     }
   }
 
-
   return (
     <>
       <div>
         <GlobalStyles />
-        <div tw='dark:bg-gray-800 dark:text-gray-200'>
+        <div tw='relative z-0 dark:bg-gray-800 dark:text-gray-200'>
           <div tw='flex'>
             <Header
               drawerWidth={drawerWidth}

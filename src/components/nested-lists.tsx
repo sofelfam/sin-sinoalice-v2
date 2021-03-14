@@ -57,7 +57,7 @@ const Component = React.memo((props: NestedListsProps) => {
   return (
     <>
       <button
-        tw='focus:outline-none focus-visible:ring-2 text-left'
+        tw='focus:outline-none focus-visible:ring-2 text-left w-full'
         onClick={() => handleClick()}
         {...rest}
       >
