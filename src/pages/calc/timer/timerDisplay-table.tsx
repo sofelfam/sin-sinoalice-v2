@@ -43,7 +43,7 @@ const TimerTable = (props: timerTableProps) => {
           <div tw='flex'>
             <div tw='w-20 h-20 my-1'>
               <div data-id={coloMareId} />
-              <AnyImage filename={`images/cards/CardS${imageId}.png`} />
+              <AnyImage filename={`cards/CardS${imageId}.png`} />
             </div>
             <div>
               <div tw='flex' >

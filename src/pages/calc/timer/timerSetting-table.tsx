@@ -118,7 +118,7 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
                   checked={toggleCheck('5s')}
                 />
                 <div tw='absolute left-0 top-0 w-full h-full -z-1'>
-                  <AnyImage filename='images/cards/CardS5975.png' />
+                  <AnyImage filename='cards/CardS5975.png' />
                 </div>
               </div>
               <div tw='relative h-16 rounded-r-md overflow-hidden'>
@@ -133,7 +133,7 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
                   checked={toggleCheck('90s')}
                 />
                 <div tw='absolute left-0 top-0 w-full h-full -z-1'>
-                  <AnyImage filename='images/cards/CardS7549.png' />
+                  <AnyImage filename='cards/CardS7549.png' />
                 </div>
               </div>
             </div>
@@ -181,7 +181,7 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
                   disabled={optButtonDisabled}
                 >
                   <div tw='absolute -top-2 -left-2 w-20 h-20 -z-1'>
-                    <AnyImage filename='images/cards/CardS6416.png' />
+                    <AnyImage filename='cards/CardS6416.png' />
                   </div>
                 </button>
                 <label
@@ -199,7 +199,7 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
                   disabled={optButtonDisabled}
                 >
                   <div tw='absolute -top-2 -left-2 w-20 h-20 -z-1'>
-                    <AnyImage filename='images/cards/CardS2672.png' />
+                    <AnyImage filename='cards/CardS2672.png' />
                   </div>
                 </button>
                 <label

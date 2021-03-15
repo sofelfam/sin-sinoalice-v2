@@ -57,7 +57,7 @@ const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProp
             {(history || []).map((row: historyProps, index: number) => (
               <tr key={`history-${index}`}>
                 <td tw='w-20 h-20'>
-                  <AnyImage filename={`images/cards/CardS${('0000' + row.id).slice(-4)}.png`} />
+                  <AnyImage filename={`cards/CardS${('0000' + row.id).slice(-4)}.png`} />
                 </td>
                 <td css={[classes.cell]}>{row.nowText.slice(3,8)}</td>
                 <td css={[classes.cell]}>{row.readyText.slice(3,8)}</td>

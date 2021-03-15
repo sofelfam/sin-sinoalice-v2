@@ -23,7 +23,7 @@ export default (filename: string): FluidObject | undefined => {
   // it is configured in gatsby-config.js of `gatsby-source-filesystem`
   const data = useStaticQuery<Props>(graphql`
     query {
-      images: allFile {
+      images: allFile(filter: { sourceInstanceName: { eq: "images" } }) {
         edges {
           node {
             relativePath

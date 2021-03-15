@@ -215,7 +215,6 @@ const ComboTable = () => {
     }));
   }
   
-  
   const addlist = (init?: number[]) => {
     setCombolists([...combolists, {
       valid: true,

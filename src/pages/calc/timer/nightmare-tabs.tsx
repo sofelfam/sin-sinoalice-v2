@@ -65,7 +65,7 @@ const TimerButtonIcon= (props: TimerButtonIconProps) => {
             tw='w-16 h-16 focus:outline-none focus-visible:ring'
             {...rest}
           >
-            <AnyImage filename={`images/cards/CardS${imageId}.png`} />
+            <AnyImage filename={`cards/CardS${imageId}.png`} />
           </button>
         )
       })}

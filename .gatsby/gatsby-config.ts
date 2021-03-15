@@ -36,8 +36,8 @@ export default {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `assets`,
-        path: `assets`,
+        name: `images`,
+        path: `assets/images`,
       },
     },
     {
@@ -97,7 +97,7 @@ export default {
         background_color: backgroundColor,
         theme_color: themeColor,
         display: `standalone`,
-        icon: `./assets/icon.png`,
+        icon: `./assets/images/icon.png`,
       },
     },
     `gatsby-plugin-offline`,

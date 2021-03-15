@@ -3,6 +3,8 @@ import 'twin.macro';
 import TimerDisplayTable from './timerDisplay-table';
 import TimerHistoryTable from './timerHistory-table';
 import TimerSettingTable from './timerSetting-table';
+import soundStart from '../../../../assets/sounds/cursor2.mp3'
+import soundEnd from '../../../../assets/sounds/warning1.mp3'
 
 export interface historyProps {
   id: string;
@@ -74,8 +76,8 @@ const ColoTimerTable = () => {
 
   const [audio, setAudio] = useState<HTMLAudioElement[]>();
   useEffect(() => {
-    setAudio([new Audio('../../static/sounds/cursor2.mp3'),
-              new Audio('../../static/sounds/warning1.mp3')])
+    setAudio([new Audio(soundStart),
+              new Audio(soundEnd)]);
   }, []);
 
   const getCloseColoTime = (): Date => {
