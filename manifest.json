@@ -1,4 +1,5 @@
 {
   "main.js": "render-page.js",
-  "main.js.map": "render-page.js.map"
+  "main.js.map": "render-page.js.map",
+  "static/warning1.mp3": "static/warning1-066edbab5ef950bc88ed83dcb20e9f31.mp3"
 }
