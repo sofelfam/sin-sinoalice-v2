@@ -101,9 +101,9 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
 
   return(
     <div tw='p-2'>
-      <h6>タイマー設定</h6>
+      <h6 tw='dark:text-white'>タイマー設定</h6>
       <div>
-        <div tw='flex flex-row justify-between items-center px-4'>
+        <div tw='flex flex-row justify-between items-center px-4 lg:px-20'>
           <div tw='flex flex-col m-1'>
             <div tw='inline-flex flex-row mb-1'>
               <div tw='relative h-16 rounded-l-md overflow-hidden'>
@@ -171,7 +171,7 @@ const TimerSettingTable = (props: timerSettingTableProps) => {
           </button>
         </div>
         <div>
-          <div tw='flex justify-between p-2'>
+          <div tw='flex justify-between p-2 lg:px-16'>
             <div tw='flex'>
               <div tw='flex flex-col'>
                 <button
