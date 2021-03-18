@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'twin.macro';
 
 interface CounterProps {
@@ -28,6 +28,8 @@ const Component = (props: CounterProps) => {
           tw='outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold hover:text-black focus:text-black flex items-center text-gray-700 outline-none'
           name='custom-input-number'
           value={value}
+          max={max ? 999999 : max}
+          min={min ? -999999 : min}
           onChange={(e) => setValue(Number(e.target.value))}
         />
         <button

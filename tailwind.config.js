@@ -68,7 +68,7 @@ module.exports = {
       'transw-68': 'rgba(255, 255, 255, 0.68)',
       'transw-76': 'rgba(255, 255, 255, 0.76)',
       'transw-84': 'rgba(255, 255, 255, 0.84)',
-      'transw-92': 'rgba(255, 255, 255, 0.92)',
+      'transw-92': 'rgba(255, 255, 255, 0.92)'
     }),
     extend: {
       minHeight: {
@@ -88,7 +88,10 @@ module.exports = {
         '1/2': '50%',
         '3/4': '75%',
         'full': '100%',
-        'screen': '100vh',
+        'screen': '100vh'
+      },
+      height: {
+        '22': '5.5rem'
       },
       transitionProperty: {
         'background': 'background-color,fill,stroke',

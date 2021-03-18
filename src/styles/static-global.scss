@@ -45,6 +45,10 @@ html {
     margin: .9rem 0;
   }
 
+  span {
+    white-space: nowrap;
+  }
+
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -58,5 +62,5 @@ html {
 #gatsby-focus-wrapper {
   display: flex;
   flex-flow: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 7rem - 5rem);
 }
