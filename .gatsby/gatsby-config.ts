@@ -26,7 +26,6 @@ export default {
     `gatsby-plugin-emotion`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -60,7 +59,7 @@ export default {
     {
       resolve: `gatsby-plugin-webpack-bundle-analyzer`,
       options: {
-        openAnalyzer: false,
+        openAnalyzer: true,
       },
     },
     {
