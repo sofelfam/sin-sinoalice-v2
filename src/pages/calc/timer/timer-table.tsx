@@ -235,16 +235,16 @@ const ColoTimerTable = () => {
     }
   }
 
-  const handleShinmaButton = useCallback(() => {
+  const handleShinmaButton = (() => {
     const initShinma = new Date();
     tick_tock(0);
     setShinmaEndTime(getEndDate(-90, coloCount));
     
     if (shinmaCountDownRef.current !== null) clearInterval(shinmaCountDownRef.current);
     shinmaCountDownRef.current = setInterval(shinma_countdown.bind(undefined, initShinma), 50);
-  }, []);
+  });
 
-  const handleStartButton = useCallback(() => {
+  const handleStartButton = (() => {
     setStartActivate(true);
     readyRef.current = new Date();
     leftTimeRef.current = coloCount;
@@ -256,9 +256,9 @@ const ColoTimerTable = () => {
     mareCountDownRef.current = null;
 
     setStartButtonDisabled(true);
-  }, []);
+  });
 
-  const handleRestartButton = useCallback(() => {
+  const handleRestartButton = (() => {
     readyRef.current = new Date();
     if (mareTimeRef.current !== null) setColoMareTime([getEndDate(-1 - mareTimeRef.current[2], coloCount), getEndDate(-1 - mareTimeRef.current[2] - mareTimeRef.current[1], coloCount)]);
     
@@ -268,23 +268,23 @@ const ColoTimerTable = () => {
     mareCountDownRef.current = null;
     readyCountDownRef.current = setInterval(ready_countdown.bind(undefined, true), 50);
     mareCountDownRef.current = setInterval(mare_countdown, 50);
-  }, []);
+  });
 
-  const handleShorteningButton = useCallback(() => {
+  const handleShorteningButton = (() => {
     if (!(readyRef.current !== null && leftTimeRef.current !== null)) return;
     readyRef.current = getEndDate(-60, readyRef.current);
     leftTimeRef.current = getEndDate(60, leftTimeRef.current);
     setColoMareTime([getEndDate(60, coloMareTime[0]), getEndDate(60, coloMareTime[1])]);
-  }, []);
+  });
   
-  const handleMinusButton = useCallback(() => {
+  const handleMinusButton = (() => {
     if (!(readyRef.current !== null && leftTimeRef.current !== null)) return;
     readyRef.current = getEndDate(-1, readyRef.current);
     leftTimeRef.current = getEndDate(1, leftTimeRef.current);
     setColoMareTime([getEndDate(1, coloMareTime[0]), getEndDate(1, coloMareTime[1])]);
-  }, []);
+  });
 
-  const handleClearButton = useCallback(() => {
+  const handleClearButton = (() => {
     const initTime = nowZeroDate();
     setReadyCount(initTime);
     setMareCount(initTime);
@@ -302,9 +302,9 @@ const ColoTimerTable = () => {
     setStartButtonDisabled(false);
     setOptButtonDisabled(true);
     updateTriggers.clear();
-  }, []);
+  });
 
-  const handleNightmareButton = useCallback((e: React.MouseEvent<HTMLElement>) => {
+  const handleNightmareButton = ((e: React.MouseEvent<HTMLElement>) => {
     if (startActivate === false) {
       readyRef.current = new Date;
       leftTimeRef.current = coloCount;
@@ -341,7 +341,7 @@ const ColoTimerTable = () => {
     const countText_end = getTimeText(getEndDate((mareTimeRef.current[0] + mareTimeRef.current[1]) * -1 - 1, leftTimeRef.current));
 
     setHistory(history => [...history, {id: tempId, nowText: countText_now, readyText: countText_ready, endText: countText_end}]);
-  }, []);
+  });
 
   return(
     <div tw='flex lg:w-4/5 lg:mx-auto w-full mx-0'>

@@ -25,7 +25,7 @@ const Header = (props: drawerProps): JSX.Element => {
   }
   
   return (
-    <DrawerWrapper css={open ? css`width: ${drawerWidth}px; transform: none;` : css`width: ${drawerWidth}px; transform: translateX(-${drawerWidth}px); visibility: hidden;`}>
+    <DrawerWrapper css={open ? css`width: ${drawerWidth}px; transform: none;` : css`width: ${drawerWidth}px; transform: translateX(-${drawerWidth}px);`}>
       <div tw='flex py-0 px-3 min-h-22 items-center justify-between'>
         <div tw='flex flex-row'>
           <div tw='w-16 h-16 mr-3'>
