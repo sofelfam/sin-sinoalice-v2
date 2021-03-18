@@ -26,6 +26,7 @@
     "react/jsx-uses-react": 1,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", ".tsx"] }],
     "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "prettier/prettier": ["error", { "arrowParens": "always", "printWidth": 120 }],
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],

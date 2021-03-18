@@ -18,7 +18,7 @@ interface timerHistoryProps {
   setHistory: React.Dispatch<React.SetStateAction<historyProps[]>>;
 }
 
-const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProps) => {
+const TimerHistoryTable = React.memo((props: timerHistoryProps) => {
   const { history, setHistory } = props;
 
   const handleDeleteAllButton = useCallback(() => {
@@ -77,6 +77,6 @@ const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProp
       </div>
     </>
   );
-};
+});
 
 export default TimerHistoryTable;

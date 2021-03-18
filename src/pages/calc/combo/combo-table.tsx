@@ -261,7 +261,6 @@ const ComboTable = () => {
     return (bonus += 200 * 70 + 300 * 50 + c * 35) / 100000;
   }, [combolists]);
 
-
   return(
     <>
       <div>

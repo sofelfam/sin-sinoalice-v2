@@ -11,7 +11,7 @@ interface TabPanelProps {
   children?: React.ReactNode;
 }
   
-const TabPanel = (props: TabPanelProps) => {
+const TabPanel = React.memo((props: TabPanelProps) => {
   const { children, value, index, ...rest } = props;
 
   return (
@@ -30,7 +30,7 @@ const TabPanel = (props: TabPanelProps) => {
       }
     </div>
   );
-};
+});
 
 interface TimerButtonIconProps {
   id: string,

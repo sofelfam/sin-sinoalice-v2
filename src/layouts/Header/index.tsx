@@ -10,23 +10,22 @@ interface HeaderProps {
   handleDrawerChange: () => void;
 }
 
+const HeaderWrapper: React.FC = (props) => {
+  return <div tw='flex fixed top-0 right-0 z-40 w-full shadow-drop transition transition-width ease-out' {...props}>{props.children}</div>
+}
+const NavbarWrapper: React.FC = (props) => {
+  return <div tw='flex h-22 bg-indigo-800 justify-start items-center px-6 w-screen' {...props}>{props.children}</div>
+}
+
 const Header = (props: HeaderProps): JSX.Element => {
   const { drawerWidth, open, handleDrawerChange } = props;
   const { title } = SwitchTitle.useContainer();
-  const HeaderWrapper: React.FCX = (props) => {
-    return <div tw='flex fixed top-0 right-0 z-40 w-full shadow-drop transition transition-width ease-out' {...props}>{props.children}</div>
-  }
-  const NavbarWrapper: React.FCX = (props) => {
-    return <div tw='flex min-h-22 bg-indigo-800 justify-start items-center px-6' {...props}>{props.children}</div>
-  }
   
   return (
     <>
       <div>
-        <HeaderWrapper
-          css={open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`}
-        >
-          <NavbarWrapper css={open ? tw`w-full` : tw`w-screen`}>
+        <HeaderWrapper css={open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`}>
+          <NavbarWrapper css={open && tw`w-full`}>
             <button
               tw='p-4 mr-4 rounded-full cursor-pointer hover:bg-focus focus:outline-none focus-visible:ring-2 transition'
               aria-label='open drawer'

@@ -33,15 +33,15 @@ const classes = {
   `
 };
 
-const TimerDataLabel: React.FCX = (props) => {
+const TimerDataLabel: React.FC = (props) => {
   return <div css={classes.timerDataLabel} {...props}>{props.children}</div>;
 }
 
-const TimerTextLabel2: React.FCX = (props) => {
+const TimerTextLabel2: React.FC = (props) => {
   return <div css={classes.timerTextLabel2} {...props}>{props.children}</div>;
 }
 
-const TimerTextLabel4: React.FCX = (props) => {
+const TimerTextLabel4: React.FC = (props) => {
   return <div css={classes.timerTextLabel4} {...props}>{props.children}</div>;
 }
 
@@ -184,7 +184,7 @@ const TimerDisplayTable = (props: timerDisplayTableProps) => {
 
   return (
     <div tw='flex flex-wrap relative'>
-      <div tw='absolute top-0 right-4 sm:block hidden'>
+      <div tw='absolute top-0 right-4'>
         <input
           type='checkbox'
           id='zoomButton'
@@ -193,7 +193,7 @@ const TimerDisplayTable = (props: timerDisplayTableProps) => {
         />
         <label
           htmlFor='zoomButton'
-          tw='inline-block w-12 h-10 cursor-pointer rounded transition ease px-2 py-1 bg-transb-16 dark:bg-transw-24 hover:bg-transb-24 dark:hover:bg-transw-16'
+          tw='inline-block w-12 h-10 cursor-pointer rounded transition ease px-2 py-1 bg-transb-16 hover:bg-transb-24 dark:(bg-transw-24 hover:bg-transw-16)'
         >
           {zoom
             ?

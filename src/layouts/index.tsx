@@ -7,6 +7,10 @@ import Header from './Header';
 
 const drawerWidth = 240;
 
+const ChildrenWrapper: React.FCX = (props) => {
+  return <div tw='pt-28 flex-grow lg:px-6 transition transition-spacing ease-out' {...props}>{props.children}</div>
+}
+
 export const Layout: React.FC = ({ children }) => {
   const [open, setOpen] = useState(false);
 
@@ -22,9 +26,6 @@ export const Layout: React.FC = ({ children }) => {
       localStorage.setItem(`drawer`, `open`);
       setOpen(true);
     }
-  }
-  const ChildrenWrapper: React.FCX = (props) => {
-    return <div tw='pt-28 flex-grow lg:px-6 transition transition-spacing ease-out' {...props}>{props.children}</div>
   }
 
   return (

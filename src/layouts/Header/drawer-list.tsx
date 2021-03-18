@@ -18,11 +18,12 @@ interface drawerProps {
   handleDrawerChange: () => void;
 }
 
+const DrawerWrapper: React.FC = (props) => {
+  return <nav tw='fixed top-0 left-0 right-auto flex flex-col flex-auto h-full outline-none z-50 border-r border-solid border-gray-400 dark:border-gray-50 transition ease-out' {...props}>{props.children}</nav>
+}
+
 const Header = (props: drawerProps): JSX.Element => {
   const { drawerWidth, open, handleDrawerChange } = props;
-  const DrawerWrapper: React.FCX = (props) => {
-    return <nav tw='fixed top-0 left-0 right-auto flex flex-col flex-auto h-full outline-none z-50 border-r border-solid border-gray-400 dark:border-gray-50 transition ease-out' {...props}>{props.children}</nav>
-  }
   
   return (
     <DrawerWrapper css={open ? css`width: ${drawerWidth}px; transform: none;` : css`width: ${drawerWidth}px; transform: translateX(-${drawerWidth}px);`}>
