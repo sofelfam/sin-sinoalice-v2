@@ -50,14 +50,13 @@ export const ToggleDarkMode = (): JSX.Element => {
           name='toggle'
           id='toggle'
           checked={darkMode}
-          tw='absolute block left-0 w-8 h-8 dark:bg-white border-4 dark:border-gray-400 rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring bg-gray-800 border-gray-300
-            checked:left-4 checked:border-gray-400
-            transition transition-locate hover:ring-8 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10'
+          tw='absolute block left-0 w-8 h-8 border-4 rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring bg-gray-800 border-gray-300
+            checked:(left-4 border-gray-400) transition transition-locate hover:ring-8 ring-black ring-opacity-5 dark:(bg-white border-gray-400 ring-white ring-opacity-10)'
           onChange={handleChangeDarkMode}
         />
         <label
           htmlFor='toggle'
-          tw='block h-8 align-middle overflow-hidden text-gray-300 bg-gray-300 rounded-full cursor-pointer dark:text-gray-400 dark:bg-gray-400 dark:border-gray-400 border-gray-300 border-2'
+          tw='block h-8 align-middle overflow-hidden text-gray-300 bg-gray-300 rounded-full cursor-pointer dark:(text-gray-400 bg-gray-400 border-gray-400) border-gray-300 border-2'
         >
           toggle
         </label>

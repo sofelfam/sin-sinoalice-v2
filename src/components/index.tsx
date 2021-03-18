@@ -3,6 +3,7 @@ export { default as WrapPageElement } from './wrap-page-element';
 export { default as WrapRootElement } from './wrap-root-element';
 export { default as Counter } from './counter';
 export { default as Divider } from './divider';
+export { default as TabButton } from './tab-button';
 export { default as NetlifyForm } from './netlify-form';
 export { default as IconList } from './icon-list';
 export { default as NestedLists } from './nested-lists';

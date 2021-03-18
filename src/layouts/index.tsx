@@ -23,6 +23,9 @@ export const Layout: React.FC = ({ children }) => {
       setOpen(true);
     }
   }
+  const ChildrenWrapper: React.FCX = (props) => {
+    return <div tw='pt-28 flex-grow lg:px-6 transition transition-spacing ease-out' {...props}>{props.children}</div>
+  }
 
   return (
     <>
@@ -36,12 +39,11 @@ export const Layout: React.FC = ({ children }) => {
               handleDrawerChange={handleDrawerChange}
             />
 
-            <div
-              css={[tw`pt-28 flex-grow lg:px-6 transition transition-spacing ease-out`,
-              open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`]}
+            <ChildrenWrapper
+              css={open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`}
             >
               {children}
-            </div>
+            </ChildrenWrapper>
 
           </div>
           <Footer

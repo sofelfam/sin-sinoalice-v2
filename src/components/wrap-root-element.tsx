@@ -2,8 +2,6 @@ import React from 'react';
 import Layout from 'src/layouts';
 import { SwitchTitle } from 'src/store';
 
-import styled from '@emotion/styled';
-
 type ContainerProps = { element: React.ReactNode };
 type Props = ContainerProps;
 
@@ -14,8 +12,6 @@ const Component: React.FCX<Props> = ({ element }) => (
   </SwitchTitle.Provider>
 );
 
-const StyledComponent = styled(Component)``;
-
-const Container: React.FCX<ContainerProps> = (props) => <StyledComponent {...props} />;
+const Container: React.FCX<ContainerProps> = (props) => <Component {...props} />;
 
 export default Container;

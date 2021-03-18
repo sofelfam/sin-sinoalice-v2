@@ -26,6 +26,10 @@ interface ListsProps {
   nested?: boolean;
 }
 
+interface LinkWrapperProps {
+  to: string;
+}
+
 /**
  * @param {JSX.Element} icon svg element
  * @param {string} text list title
@@ -34,27 +38,35 @@ interface ListsProps {
  */
 const IconList = (props: ListsProps) => {
   let wrapper;
-  const { icon, text, endIcon, link, nested, ...other } = props;
+  const { icon, text, endIcon, link, nested, ...rest } = props;
+  const LinkWrapper: React.FCX<LinkWrapperProps> = (props) => {
+    const { to, children, ...rest} = props;
+    return <Link to={to} css={classes.list} {...rest}>{children}</Link>
+  }
+  const UnlinkWrapper: React.FCX = (props) => {
+    return <div css={classes.list} {...props}>{props.children}</div>
+  }
+
   if (link) {
     wrapper = (
-      <div {...other}>
-        <Link to={link} css={[classes.list, nested ? classes.nestedList : tw``]}>
+      <div {...rest}>
+        <LinkWrapper to={link} css={nested && classes.nestedList}>
           <div css={classes.listIcon}>{icon}</div>
           <div css={classes.listText}>{text}</div>
           {endIcon && <div tw='inline-flex'>{endIcon}</div>}
-        </Link>
+        </LinkWrapper>
       </div>
     );
   } else {
     wrapper = (
-      <div
-        css={[classes.list, nested ? classes.nestedList : tw``]}
-        {...other}
+      <UnlinkWrapper
+        css={nested && classes.nestedList}
+        {...rest}
       >
         <div css={classes.listIcon}>{icon}</div>
         <div css={classes.listText}>{text}</div>
         {endIcon && <div tw='inline-flex'>{endIcon}</div>}
-      </div>
+      </UnlinkWrapper>
     );
   }
 

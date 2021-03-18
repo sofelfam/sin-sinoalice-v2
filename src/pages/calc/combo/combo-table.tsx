@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Divider } from "src/components";
 import { AddIcon, DuplicateIcon, Trash } from "src/components/icons";
 import 'twin.macro';
@@ -67,7 +67,7 @@ const ComboInput = (props: comboInputProps): JSX.Element => {
   );
 };
 
-const ComboList: React.FCX<comboListProps> = (props: comboListProps) => {
+const ComboList = React.memo((props: comboListProps) => {
   const { combolists, addlist, deletelist, handleTextFieldChanges, handleSpinnerButton, handleSwitchChanges } = props;
   
   return(
@@ -175,7 +175,7 @@ const ComboList: React.FCX<comboListProps> = (props: comboListProps) => {
       ))}
     </>
   );
-};
+});
 
 const INITIAL_list = {
   valid: true,
@@ -184,6 +184,16 @@ const INITIAL_list = {
   combo5: 16,
   combo10: 2,
 };
+
+
+const ComboBonusComponent = React.memo((props: {comboBonus: () => number}) => {
+  return (
+    <div tw='flex flex-col'>
+      <span>コンボ倍率:</span>
+      <span tw='font-bold'>{props.comboBonus()}</span>
+    </div>
+  );
+});
 
 const ComboTable = () => {
   const [combolists, setCombolists] = useState([INITIAL_list]);
@@ -215,7 +225,7 @@ const ComboTable = () => {
     }));
   }
   
-  const addlist = (init?: number[]) => {
+  const addlist = useCallback((init?: number[]) => {
     setCombolists([...combolists, {
       valid: true,
       loop: init ? init[3] : 1,
@@ -223,7 +233,7 @@ const ComboTable = () => {
       combo10: init ? init[1] : 2,
       combo0: init ? init[2] : 2,
     }]);
-  }
+  }, [combolists]);
 
   const deletelist = (list: listProps) => {
     setCombolists(combolists.filter(x => x !== list));
@@ -236,17 +246,22 @@ const ComboTable = () => {
     }));
   }
 
-  const comboBonus = (combo: number) => {
+
+  const ComboSum = combolists.reduce((pre, x) => pre + (x.combo5 * 6 + x.combo10 * 11 + x.combo0 * 1) * x.loop, 0);
+  
+  const comboBonus = useCallback(() => {
+    const combo = ComboSum;
+
     let bonus = 100000;
     const a = combo - 200;
     if (a < 0) return (bonus += combo * 70) / 100000;
     const b = a - 300;
     if (b < 0) return (bonus += 200 * 70 + a * 50) / 100000;
-    return (bonus += 200 * 70 + 300 * 50 + b * 35) / 100000;
-  }
+    const c = b > 500 ? 500 : b;
+    return (bonus += 200 * 70 + 300 * 50 + c * 35) / 100000;
+  }, [combolists]);
 
-  const ComboSum = combolists.reduce((pre, x) => pre + (x.combo5 * 6 + x.combo10 * 11 + x.combo0 * 1) * x.loop, 0);
-  
+
   return(
     <>
       <div>
@@ -259,10 +274,7 @@ const ComboTable = () => {
             <span>コンボ人数:</span>
             <span tw='font-bold'>{combolists.length}</span>
           </div>
-          <div tw='flex flex-col'>
-            <span>コンボ倍率:</span>
-            <span tw='font-bold'>{comboBonus(ComboSum)}</span>
-          </div>
+          <ComboBonusComponent comboBonus={comboBonus} />
           <button
             type="button"
             tw="flex items-center bg-lightblue-500 text-white rounded-md px-4 py-2 m-2 transition ease select-none hover:bg-lightblue-700 focus:outline-none focus:ring"

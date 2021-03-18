@@ -20,11 +20,12 @@ interface drawerProps {
 
 const Header = (props: drawerProps): JSX.Element => {
   const { drawerWidth, open, handleDrawerChange } = props;
-  return(
-    <nav css={[tw`fixed top-0 left-0 right-auto flex flex-col flex-auto h-full outline-none z-50 border-r border-solid border-gray-400 dark:border-gray-50 transition ease-out`,
-      css`width: ${drawerWidth}px`,
-      open ? tw`transform-none` : css`transform: translateX(-${drawerWidth}px); visibility: hidden;`]}
-    >
+  const DrawerWrapper: React.FCX = (props) => {
+    return <nav tw='fixed top-0 left-0 right-auto flex flex-col flex-auto h-full outline-none z-50 border-r border-solid border-gray-400 dark:border-gray-50 transition ease-out' {...props}>{props.children}</nav>
+  }
+  
+  return (
+    <DrawerWrapper css={open ? css`width: ${drawerWidth}px; transform: none;` : css`width: ${drawerWidth}px; transform: translateX(-${drawerWidth}px); visibility: hidden;`}>
       <div tw='flex py-0 px-3 min-h-22 items-center justify-between'>
         <div tw='flex flex-row'>
           <div tw='w-16 h-16 mr-3'>
@@ -153,7 +154,7 @@ const Header = (props: drawerProps): JSX.Element => {
           <ToggleDarkMode />
         </div>
       </div>
-    </nav>
+    </DrawerWrapper>
   );
 };
 

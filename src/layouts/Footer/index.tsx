@@ -9,13 +9,16 @@ interface FooterProps {
 
 const Footer = (props: FooterProps): JSX.Element => {
   const { open, drawerWidth } = props;
+  const FooterWrapper: React.FCX = (props) => {
+    return <div tw='flex w-full h-20 justify-center items-center transition transition-locate ease-out' {...props}>{props.children}</div>
+  }
+
   return (
-    <div
-      css={[tw`flex w-full h-20 justify-center items-center transition transition-locate ease-out`,
-        open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`]}
+    <FooterWrapper
+      css={open ? css`margin-left: ${drawerWidth}px; width: calc(100% - ${drawerWidth}px)` : tw`ml-0`}
     >
       <footer>Footer</footer>
-    </div>
+    </FooterWrapper>
   );
 };
 
