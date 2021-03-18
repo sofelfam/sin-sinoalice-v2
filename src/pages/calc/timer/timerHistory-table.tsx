@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { AnyImage } from "src/components";
 import { Trash } from "src/components/icons";
 import tw from 'twin.macro';
@@ -21,9 +21,9 @@ interface timerHistoryProps {
 const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProps) => {
   const { history, setHistory } = props;
 
-  const handleDeleteAllButton = () => {
+  const handleDeleteAllButton = useCallback(() => {
     setHistory([]);
-  }
+  }, []);
   
   const handleDeleteButton = (row: historyProps) => {
     setHistory(history.filter(x => x !== row));
@@ -46,11 +46,11 @@ const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProp
         <table tw='text-xl text-center'>
           <thead>
             <tr>
-              <th css={[classes.headerCell]}>発動メア</th>
-              <th css={[classes.headerCell]}>準備</th>
-              <th css={[classes.headerCell]}>発動</th>
-              <th css={[classes.headerCell]}>終了</th>
-              <th css={[classes.headerCell]}>削除</th>
+              <th css={classes.headerCell}>発動メア</th>
+              <th css={classes.headerCell}>準備</th>
+              <th css={classes.headerCell}>発動</th>
+              <th css={classes.headerCell}>終了</th>
+              <th css={classes.headerCell}>削除</th>
             </tr>
           </thead>
           <tbody>
@@ -59,9 +59,9 @@ const TimerHistoryTable: React.FCX<timerHistoryProps> = (props: timerHistoryProp
                 <td tw='w-20 h-20'>
                   <AnyImage filename={`cards/CardS${('0000' + row.id).slice(-4)}.png`} />
                 </td>
-                <td css={[classes.cell]}>{row.nowText.slice(3,8)}</td>
-                <td css={[classes.cell]}>{row.readyText.slice(3,8)}</td>
-                <td css={[classes.cell]}>{row.endText.slice(3,8)}</td>
+                <td css={classes.cell}>{row.nowText.slice(3,8)}</td>
+                <td css={classes.cell}>{row.readyText.slice(3,8)}</td>
+                <td css={classes.cell}>{row.endText.slice(3,8)}</td>
                 <td>
                   <button
                     tw='h-12 w-12 bg-rose-600 text-white rounded-md px-2 py-1 sm:px-2 sm:py-1 sm:m-2 transition ease select-none hover:bg-rose-800 focus:outline-none focus-visible:ring'

@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import tw from 'twin.macro';
-import { AnyImage } from 'src/components';
+import { AnyImage, TabButton } from 'src/components';
 import { useDataNightmare } from 'src/hooks';
 import { nightmareProps } from 'src/hooks/use-data-nightmare';
 import { css } from '@emotion/core';
 
-const classes = {
-  tabButton: tw`
-    block w-full h-20 flex-shrink-0 cursor-pointer opacity-70 transition ease focus:outline-none focus-visible:ring
-  `
-}
-
 interface TabPanelProps {
-  children?: React.ReactNode;
   index: number;
   value: number;
+  children?: React.ReactNode;
 }
   
 const TabPanel = (props: TabPanelProps) => {
-const { children, value, index, ...other } = props;
+  const { children, value, index, ...rest } = props;
 
   return (
     <div
@@ -27,23 +21,23 @@ const { children, value, index, ...other } = props;
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       tw='flex-grow overflow-hidden'
-      {...other}
+      {...rest}
     >
-      {value === index && (
+      {value === index &&
         <div tw='flex flex-col h-full overflow-y-scroll'>
           {children}
         </div>
-      )}
+      }
     </div>
   );
-}
+};
 
 interface TimerButtonIconProps {
   id: string,
   handleNightmareButton: (e: React.MouseEvent<HTMLElement>) => void,
 }
 
-const TimerButtonIcon= (props: TimerButtonIconProps) => {
+const TimerButtonIcon = (props: TimerButtonIconProps) => {
   const { id, handleNightmareButton, ...rest } = props;
   const nightmareData = useDataNightmare();
   const imageId = ('0000' + id).slice(-4);
@@ -59,6 +53,7 @@ const TimerButtonIcon= (props: TimerButtonIconProps) => {
           <button
             key={id}
             onClick={(e) => handleNightmareButton(e)}
+            aria-label={data.name}
             data-id={id}
             data-ready={data.ready}
             data-activate={data.activate}
@@ -77,9 +72,9 @@ interface nightmareTabsProps {
   handleNightmareButton: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const NightmareTabs = (props: nightmareTabsProps) => {
+const NightmareTabs = React.memo((props: nightmareTabsProps) => {
   const { handleNightmareButton } = props;
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     const item = localStorage.getItem(`nightmareTabs`);
@@ -87,22 +82,68 @@ const NightmareTabs = (props: nightmareTabsProps) => {
     setValue(val);
   }, []);
 
-  const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = useCallback((_event: React.ChangeEvent<{}>, newValue: number) => {
     localStorage.setItem(`nightmareTabs`, `${newValue}`);
     setValue(newValue);
-  };
+  }, [setValue]);
+
+  const HighlightBar: React.FCX = (props) => {
+    return <span tw='absolute right-0 h-20 w-1 bg-rose-500 transition transition-locate ease duration-300' {...props}>{props.children}</span>
+  }
 
   return (
     <div tw='flex flex-row h-80 border border-gray-400 rounded'>
       <div tw='relative flex-shrink-0 flex flex-col overflow-y-scroll border-r-2 border-gray-400 sm:w-60 w-32 mr-px'>
-        <button css={[classes.tabButton, value === 0 ? tw`opacity-100` : css``]} onClick={(e) => handleChange(e, 0)}>スキル強化</button>
-        <button css={[classes.tabButton]} onClick={(e) => handleChange(e, 1)}>スキル弱化</button>
-        <button css={[classes.tabButton]} onClick={(e) => handleChange(e, 2)}>その他</button>
-        <button css={[classes.tabButton]} onClick={(e) => handleChange(e, 3)}>SP関連</button>
-        <button css={[classes.tabButton]} onClick={(e) => handleChange(e, 4)}>バフ</button>
-        <button css={[classes.tabButton]} onClick={(e) => handleChange(e, 5)}>デバフ</button>
-        <button css={[classes.tabButton]} onClick={(e) => handleChange(e, 6)}>カスタム</button>
-        <span css={[tw`absolute right-0 h-20 w-1 bg-rose-500 transition transition-locate ease duration-300`, css`top: calc(5rem * ${value})`]}></span>
+        <TabButton
+          id='vertical-tab-0'
+          css={value === 0 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 0)}
+        >
+          スキル強化
+        </TabButton>
+        <TabButton
+          id='vertical-tab-1'
+          css={value === 1 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 1)}
+        >
+          スキル弱化
+        </TabButton>
+        <TabButton
+          id='vertical-tab-2'
+          css={value === 2 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 2)}
+        >
+          その他
+        </TabButton>
+        <TabButton
+          id='vertical-tab-3'
+          css={value === 3 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 3)}
+        >
+          SP関連
+        </TabButton>
+        <TabButton
+          id='vertical-tab-4'
+          css={value === 4 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 4)}
+        >
+          バフ
+        </TabButton>
+        <TabButton
+          id='vertical-tab-5'
+          css={value === 5 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 5)}
+        >
+          デバフ
+        </TabButton>
+        <TabButton
+          id='vertical-tab-6'
+          css={value === 6 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 6)}
+        >
+          カスタム
+        </TabButton>
+        <HighlightBar css={css`top: calc(5rem * ${value})`}></HighlightBar>
       </div>
         {/* スキル強化 */}
       <TabPanel value={value} index={0}>
@@ -235,9 +276,9 @@ const NightmareTabs = (props: nightmareTabsProps) => {
       </TabPanel>
         {/* カスタム */}
       <TabPanel value={value} index={6}>
-        <div tw='flex flex-wrap'>          
+        <div tw='flex flex-wrap'>
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='458' />
-          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='2437' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='517' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='480' />
           <span tw='w-1'></span>
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5048' />
@@ -286,6 +327,6 @@ const NightmareTabs = (props: nightmareTabsProps) => {
       </TabPanel>
     </div>
   );
-}
+});
 
 export default NightmareTabs;

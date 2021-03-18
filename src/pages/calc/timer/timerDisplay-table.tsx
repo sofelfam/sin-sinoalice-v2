@@ -33,6 +33,18 @@ const classes = {
   `
 };
 
+const TimerDataLabel: React.FCX = (props) => {
+  return <div css={classes.timerDataLabel} {...props}>{props.children}</div>;
+}
+
+const TimerTextLabel2: React.FCX = (props) => {
+  return <div css={classes.timerTextLabel2} {...props}>{props.children}</div>;
+}
+
+const TimerTextLabel4: React.FCX = (props) => {
+  return <div css={classes.timerTextLabel4} {...props}>{props.children}</div>;
+}
+
 interface timerTableProps {
   zoom: boolean;
   coloCountText: string;
@@ -41,12 +53,12 @@ interface timerTableProps {
   coloMareEndTime: string;
 };
 
-const TimerTable = (props: timerTableProps) => {
+const TimerTable = React.memo((props: timerTableProps) => {
   const { zoom, coloCountText, coloMareId, coloMareStartTime, coloMareEndTime } = props;
   const imageId = ('0000' + coloMareId).slice(-4);
 
   return(
-    <div css={[classes.timerDisplayTable]}>
+    <div css={classes.timerDisplayTable}>
       <h6 tw='sm:block hidden dark:text-white'>コロシアム残り時間</h6>
       <div tw='flex-grow flex items-center sm:items-start w-max mx-auto text-3xl'>
         <div tw='w-36 mr-4 text-center block sm:hidden'>
@@ -54,8 +66,8 @@ const TimerTable = (props: timerTableProps) => {
         </div>
         <div tw='flex flex-col'>
           <div tw='flex flex-row'>
-            <div css={[classes.timerTextLabel4, zoom ? classes.zoomTimerTextLabel4WithIcon : '']}>全体時間</div>
-            <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabelWithIcon : '']}>{coloCountText}</div>
+            <TimerTextLabel4 css={zoom && classes.zoomTimerTextLabel4WithIcon}>全体時間</TimerTextLabel4>            
+            <TimerDataLabel css={zoom && classes.zoomTimerDataLabelWithIcon}>{coloCountText}</TimerDataLabel>
           </div>
           <div tw='flex'>
             <div tw='w-20 h-20 my-1'>
@@ -64,12 +76,12 @@ const TimerTable = (props: timerTableProps) => {
             </div>
             <div>
               <div tw='flex' >
-                <div css={[classes.timerTextLabel2, zoom ? classes.zoomTimerTextLabel2WithIcon : '']}>発動</div>
-                <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabelWithIcon : '']}>{coloMareStartTime}</div>
+                <TimerTextLabel2 css={zoom && classes.zoomTimerTextLabel2WithIcon}>発動</TimerTextLabel2>
+                <TimerDataLabel css={zoom && classes.zoomTimerDataLabelWithIcon}>{coloMareStartTime}</TimerDataLabel>
               </div>
               <div tw='flex'>
-                <div css={[classes.timerTextLabel2, zoom ? classes.zoomTimerTextLabel2WithIcon : '']}>終了</div>
-                <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabelWithIcon : '']}>{coloMareEndTime}</div>
+                <TimerTextLabel2 css={zoom && classes.zoomTimerTextLabel2WithIcon}>終了</TimerTextLabel2>
+                <TimerDataLabel css={zoom && classes.zoomTimerDataLabelWithIcon}>{coloMareEndTime}</TimerDataLabel>
               </div>
             </div>
           </div>
@@ -77,7 +89,7 @@ const TimerTable = (props: timerTableProps) => {
       </div>
     </div>
   );
-};
+});
 
 interface mareTimerTableProps {
   zoom: boolean;
@@ -85,11 +97,11 @@ interface mareTimerTableProps {
   mareCountText: string;
 };
 
-const MareTimerTable = (props: mareTimerTableProps) => {
+const MareTimerTable = React.memo((props: mareTimerTableProps) => {
   const { zoom, readyCountText, mareCountText } = props;
 
   return(
-    <div css={[classes.timerDisplayTable]}>
+    <div css={classes.timerDisplayTable}>
       <h6 tw='sm:block hidden dark:text-white'>メアタイマー</h6>
       <div tw='flex-grow flex items-center sm:items-start w-max mx-auto text-3xl'>
         <div tw='w-36 mr-4 text-center block sm:hidden'>
@@ -97,18 +109,18 @@ const MareTimerTable = (props: mareTimerTableProps) => {
         </div>
         <div tw='flex flex-col'>
           <div tw='flex'>
-            <div css={[classes.timerTextLabel4, zoom ? classes.zoomTimerTextLabel4 : '']}>発動時間</div>
-            <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabel : '']}>{readyCountText}</div>
+            <TimerTextLabel4 css={zoom && classes.zoomTimerTextLabel4}>発動時間</TimerTextLabel4>
+            <TimerDataLabel css={zoom && classes.zoomTimerDataLabel}>{readyCountText}</TimerDataLabel>
           </div>
           <div tw='flex'>
-            <div css={[classes.timerTextLabel4, zoom ? classes.zoomTimerTextLabel4 : '']}>終了時間</div>
-            <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabel : '']}>{mareCountText}</div>
+            <TimerTextLabel4 css={zoom && classes.zoomTimerTextLabel4}>終了時間</TimerTextLabel4>
+            <TimerDataLabel css={zoom && classes.zoomTimerDataLabel}>{mareCountText}</TimerDataLabel>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 interface shinmaTimerTableProps {
   zoom: boolean;
@@ -116,11 +128,11 @@ interface shinmaTimerTableProps {
   shinmaEndTime: string;
 };
 
-const ShinmaTimerTable = (props: shinmaTimerTableProps) => {
+const ShinmaTimerTable = React.memo((props: shinmaTimerTableProps) => {
   const { zoom, shinmaCountText, shinmaEndTime } = props;
 
   return(
-    <div css={[classes.timerDisplayTable]}>
+    <div css={classes.timerDisplayTable}>
       <h6 tw='hidden sm:block dark:text-white'>神魔タイマー</h6>
       <div tw='flex-grow flex items-center sm:items-start w-max mx-auto text-3xl'>
         <div tw='w-36 mr-4 text-center block sm:hidden'>
@@ -128,18 +140,18 @@ const ShinmaTimerTable = (props: shinmaTimerTableProps) => {
         </div>
         <div tw='flex flex-col'>
           <div tw='flex'>
-            <div css={[classes.timerTextLabel4, zoom ? classes.zoomTimerTextLabel4 : '']}>残り時間</div>
-            <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabel : '']}>{shinmaCountText}</div>
+            <TimerTextLabel4 css={zoom && classes.zoomTimerTextLabel4}>残り時間</TimerTextLabel4>
+            <TimerDataLabel css={zoom && classes.zoomTimerDataLabel}>{shinmaCountText}</TimerDataLabel>
           </div>
           <div tw='flex'>
-            <div css={[classes.timerTextLabel4, zoom ? classes.zoomTimerTextLabel4 : '']}>終了時刻</div>
-            <div css={[classes.timerDataLabel, zoom ? classes.zoomTimerDataLabel : '']}>{shinmaEndTime}</div>
+            <TimerTextLabel4 css={zoom && classes.zoomTimerTextLabel4}>終了時刻</TimerTextLabel4>
+            <TimerDataLabel css={zoom && classes.zoomTimerDataLabel}>{shinmaEndTime}</TimerDataLabel>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 interface timerDisplayTableProps {
   coloCountText: string;
