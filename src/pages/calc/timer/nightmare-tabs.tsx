@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import tw from 'twin.macro';
-import { AnyImage, TabButton } from 'src/components';
+import { AnyImage, TabButton, ToolTip } from 'src/components';
 import { useDataNightmare } from 'src/hooks';
 import { nightmareProps } from 'src/hooks/use-data-nightmare';
 import { css } from '@emotion/core';
@@ -10,7 +10,7 @@ interface TabPanelProps {
   value: number;
   children?: React.ReactNode;
 }
-  
+
 const TabPanel = React.memo((props: TabPanelProps) => {
   const { children, value, index, ...rest } = props;
 
@@ -50,18 +50,31 @@ const TimerButtonIcon = (props: TimerButtonIconProps) => {
     <>
       {result.map((data: nightmareProps) => {
         return (
-          <button
-            key={id}
-            onClick={(e) => handleNightmareButton(e)}
-            aria-label={data.name}
-            data-id={id}
-            data-ready={data.ready}
-            data-activate={data.activate}
-            tw='w-16 h-16 focus:outline-none focus-visible:ring'
-            {...rest}
+          <ToolTip
+            tw='h-16'
+            element={
+              <>
+                <div>{data.name}</div>
+                <div>{data.cskill}</div>
+                <div>準備時間: {data.ready}</div>
+                <div>効果時間: {data.activate}</div>
+                <div>{data.cskilltxt}</div>
+              </>
+            }
           >
-            <AnyImage filename={`cards/CardS${imageId}.png`} />
-          </button>
+            <button
+              key={id}
+              onClick={(e) => handleNightmareButton(e)}
+              aria-label={data.name}
+              data-id={id}
+              data-ready={data.ready}
+              data-activate={data.activate}
+              tw='w-16 h-16 focus:outline-none focus-visible:ring'
+              {...rest}
+            >
+              <AnyImage filename={`cards/CardS${imageId}.png`} />
+            </button>
+          </ToolTip>
         )
       })}
     </>
@@ -71,6 +84,10 @@ const TimerButtonIcon = (props: TimerButtonIconProps) => {
 interface nightmareTabsProps {
   handleNightmareButton: (e: React.MouseEvent<HTMLElement>) => void;
 }
+
+const HighlightBar = React.memo((props) => {
+  return <span tw='absolute right-0 h-20 w-1 bg-rose-500 transition transition-locate ease duration-300' {...props}>{props.children}</span>
+});
 
 const NightmareTabs = React.memo((props: nightmareTabsProps) => {
   const { handleNightmareButton } = props;
@@ -86,10 +103,6 @@ const NightmareTabs = React.memo((props: nightmareTabsProps) => {
     localStorage.setItem(`nightmareTabs`, `${newValue}`);
     setValue(newValue);
   }, [setValue]);
-
-  const HighlightBar: React.FCX = (props) => {
-    return <span tw='absolute right-0 h-20 w-1 bg-rose-500 transition transition-locate ease duration-300' {...props}>{props.children}</span>
-  }
 
   return (
     <div tw='flex flex-row h-80 border border-gray-400 rounded'>

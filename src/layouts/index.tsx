@@ -52,6 +52,7 @@ export const Layout: React.FC = ({ children }) => {
             drawerWidth={drawerWidth}
           />
         </div>
+        <div id='portal' />
       </div>
     </>
   );

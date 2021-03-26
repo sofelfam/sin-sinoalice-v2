@@ -59,7 +59,7 @@ export default {
     {
       resolve: `gatsby-plugin-webpack-bundle-analyzer`,
       options: {
-        openAnalyzer: true,
+        openAnalyzer: false,
       },
     },
     {
