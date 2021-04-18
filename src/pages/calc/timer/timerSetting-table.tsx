@@ -167,17 +167,17 @@ const TimerSettingTable = React.memo((props: timerSettingTableProps) => {
     handleShinmaButton();
   }
 
-  const handleRestartButtonWithSnack = useCallback(() => {
+  const handleRestartButtonWithSnack = () => {
     handleRestartButton();
-  }, []);
+  };
 
-  const handleShorteningButtonWithSnack = useCallback(() => {
+  const handleShorteningButtonWithSnack = () => {
     handleShorteningButton();
-  }, []);
+  };
 
-  const handleMinusButtonWithSnack = useCallback(() => {
+  const handleMinusButtonWithSnack = () => {
     handleMinusButton();
-  }, []);
+  };
 
   const handleClearButtonWithSnack = useCallback(() => {
     handleClearButton();
