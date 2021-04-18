@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'src/layouts';
-import { SwitchTitle } from 'src/store';
+import { SwitchTitle, MediaMobile } from 'src/store';
 
 type ContainerProps = { element: React.ReactNode };
 type Props = ContainerProps;
@@ -8,7 +8,9 @@ type Props = ContainerProps;
 // you can use this component for some providers for redux, context API, etc...
 const Component: React.FCX<Props> = ({ element }) => (
   <SwitchTitle.Provider>
-    <Layout>{element}</Layout>
+    <MediaMobile.Provider>
+      <Layout>{element}</Layout>      
+    </MediaMobile.Provider>
   </SwitchTitle.Provider>
 );
 

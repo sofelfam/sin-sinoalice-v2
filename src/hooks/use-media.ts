@@ -25,5 +25,5 @@ export default () => {
     };
   }, []);
 
-  return { isMobile };
+  return isMobile;
 }

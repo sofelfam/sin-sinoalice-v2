@@ -6,6 +6,7 @@ import TimerSettingTable from './timerSetting-table';
 import soundStart from '../../../../assets/sounds/cursor2.mp3'
 import soundEnd from '../../../../assets/sounds/warning1.mp3'
 import { useSet } from 'src/hooks';
+import { MediaMobile } from 'src/store';
 
 export interface historyProps {
   id: string;
@@ -14,7 +15,7 @@ export interface historyProps {
   endText: string;
 }
 
-const ColoTimerTable = () => {
+const ColoTimerTable = () => {  
   const nowZeroDate = (): Date => {
     const now = new Date();
     now.setHours(0);
@@ -370,14 +371,31 @@ const ColoTimerTable = () => {
           handleNightmareButton={handleNightmareButton}
         />
       </div>
+      <HistoryTable
+        history={history}
+        setHistory={setHistory}
+      />
+    </div>
+  )
+};
+
+const HistoryTable: React.FCX<{
+  history: historyProps[];
+  setHistory: React.Dispatch<React.SetStateAction<historyProps[]>>;
+}> = ({ history, setHistory }) => {
+  const { isMobile } = MediaMobile.useContainer();
+  if (isMobile) {
+    return null;
+  } else {
+    return (
       <div tw='md:w-max md:ml-6 md:block w-0 ml-0 hidden'>
         <TimerHistoryTable
           history={history}
           setHistory={setHistory}
         />
       </div>
-    </div>
-  )
+    );
+  }
 };
 
 export default ColoTimerTable;

@@ -141,7 +141,8 @@ module.exports = {
         'height': 'height,min-height,max-height',
         'width': 'width,min-width,max-width',
         'spacing': 'margin, padding',
-        'locate': 'top,bottom,right,left,height,width,margin,padding'
+        'locate': 'top,bottom,right,left,height,width,margin,padding',
+        'filter': 'filter,backdrop-filter'
       },
       boxShadow: {
         drop: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)',

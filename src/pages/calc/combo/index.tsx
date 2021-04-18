@@ -4,8 +4,6 @@ import { css } from '@emotion/core';
 import { baseStyle } from 'src/styles';
 import { SwitchTitle } from 'src/store';
 import ComboTable from './combo-table';
-import ComboTable2 from './combo-table2';
-import ComboTable3 from './combo-table3';
 
 const Component = ({ path }: { path: string }): JSX.Element => {
   const { setTitle } = SwitchTitle.useContainer();
@@ -17,7 +15,7 @@ const Component = ({ path }: { path: string }): JSX.Element => {
     <>
       <SEO title='コンボ計算機' pathname={path} />
       <main css={css`${baseStyle}`}>
-        <ComboTable2 />
+        <ComboTable />
       </main>
     </>
   );

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import 'twin.macro';
 import { AnyImage } from "src/components";
 import { Trash } from "src/components/icons";
 import NightmareTabs from "./nightmare-tabs";
 import { Functions } from "src/hooks/use-set";
+import { historyProps } from "./timer-table";
+import TimerHistoryTable from "./timerHistory-table";
+import { MediaMobile } from "src/store";
 
 //何故か効かない
 const TriggerComponent = React.memo((props: { triggers: Set<string>; updateTriggers: Functions<string>; }) => {  
@@ -64,6 +67,83 @@ const TriggerComponent = React.memo((props: { triggers: Set<string>; updateTrigg
   );
 });
 
+const OptionComponent: React.FCX<{
+  optButtonDisabled: boolean;
+  handleRestartButtonWithSnack: () => void;
+  handleMinusButtonWithSnack: () => void;
+  handleShorteningButtonWithSnack: () => void;
+  handleClearButtonWithSnack: () => void;
+}> = React.memo(({ optButtonDisabled, handleRestartButtonWithSnack, handleMinusButtonWithSnack, handleShorteningButtonWithSnack, handleClearButtonWithSnack }) => {
+  return (
+    <div tw='flex justify-between p-2 lg:px-16'>
+      <div tw='flex'>
+        <div tw='flex flex-col'>
+          <button
+            tw='relative w-16 h-16 items-center rounded-full p-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-focus active:bg-active disabled:bg-disabled focus:outline-none focus-visible:ring overflow-hidden'
+            id='res-restart'
+            aria-label='逆刻'
+            onClick={() => handleRestartButtonWithSnack()}
+            disabled={optButtonDisabled}
+          >
+            <div tw='absolute -top-2 -left-2 w-20 h-20 -z-1'>
+              <AnyImage filename='cards/CardS6416.png' />
+            </div>
+          </button>
+          <label
+            htmlFor='res-restart'
+            tw='w-full text-sm text-center cursor-pointer overflow-hidden'
+          >
+            ロボンゴ
+          </label>
+        </div>
+        <div tw='flex flex-col'>
+          <button
+            tw='relative w-16 h-16 items-center rounded-full p-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-focus active:bg-active disabled:bg-disabled focus:outline-none focus-visible:ring overflow-hidden'
+            id='res-shortening'
+            aria-label='順刻'
+            onClick={() => handleShorteningButtonWithSnack()}
+            disabled={optButtonDisabled}
+          >
+            <div tw='absolute -top-2 -left-2 w-20 h-20 -z-1'>
+              <AnyImage filename='cards/CardS2672.png' />
+            </div>
+          </button>
+          <label
+            htmlFor='res-shortening'
+            tw='w-full text-sm text-center cursor-pointer overflow-hidden'
+          >
+            ガリア
+          </label>
+        </div>
+        <div tw='flex flex-col'>
+          <button
+            tw='w-16 h-16 items-center bg-emerald-500 text-white rounded-full px-2 py-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-emerald-700 disabled:bg-gray-400 focus:outline-none focus-visible:ring'
+            id='res-minus'
+            aria-label='-1秒'
+            onClick={() => handleMinusButtonWithSnack()}
+            disabled={optButtonDisabled}
+          >
+            <span tw='block text-center'>-1</span>
+          </button>
+          <label
+            htmlFor='res-minus'
+            tw='w-full text-sm text-center cursor-pointer overflow-hidden'
+          >
+            微調整
+          </label>
+        </div>
+      </div>
+      <button
+        tw='flex h-16 items-center bg-rose-600 text-white rounded-md px-4 py-1 sm:px-4 sm:py-2 sm:m-2 transition ease select-none hover:bg-rose-800 focus:outline-none focus-visible:ring'
+        onClick={() => handleClearButtonWithSnack()}
+      >
+        <Trash />
+        <span tw='sm:block hidden'>クリア</span>
+      </button>
+    </div>
+  )
+});
+
 interface timerSettingTableProps {
   triggers: Set<string>;
   updateTriggers: Functions<string>;
@@ -82,70 +162,26 @@ const TimerSettingTable = React.memo((props: timerSettingTableProps) => {
   //console.log('setting rendered');
   const { triggers, updateTriggers, optButtonDisabled, startButtonDisabled, handleShinmaButton, handleStartButton, handleRestartButton, handleShorteningButton, handleMinusButton, handleClearButton, handleNightmareButton } = props;
 
-  //ボタントリガーアラート
-  interface SnackbarMessage {
-    message: string;
-    severity: "success" | "info" | "warning" | "error" | undefined;
-    key: number;
-  }
-  
-  const [snackPack, setSnackPack] = useState<SnackbarMessage[]>([]);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [messageInfo, setMessageInfo] = useState<SnackbarMessage | undefined>(undefined);
-
-  useEffect(() => {
-    if (snackPack.length && !messageInfo) {
-      // Set a new snack when we don't have an active one
-      setMessageInfo({ ...snackPack[0] });
-      setSnackPack((prev) => prev.slice(1));
-      setSnackbarOpen(true);
-    } else if (snackPack.length && messageInfo && snackbarOpen) {
-      // Close an active snack when a new one is added
-      setSnackbarOpen(false);
-    }
-  }, [snackPack, messageInfo, snackbarOpen]);
-
-  const handleSnackbarOpen = (message: string, severity: "success" | "info" | "warning" | "error" | undefined) => {
-    //setSnackbarOpen(true);
-    setSnackPack((prev) => [...prev, { message, severity, key: new Date().getTime() }]);
-  }
-
-  const handleSnackbarClose = (reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbarOpen(false);
-  };
-
-  const handleExited = () => {
-    setMessageInfo(undefined);
-  };
-
-
+  //Snackbar
   const handleShinmaButtonWithSnack = () => {
     handleShinmaButton();
-    handleSnackbarOpen("神魔効果タイマー開始。", "info");
   }
 
-  const handleRestartButtonWithSnack = () => {
+  const handleRestartButtonWithSnack = useCallback(() => {
     handleRestartButton();
-    handleSnackbarOpen("[逆刻] 起動メア巻き戻し。", "info");
-  }
+  }, []);
 
-  const handleShorteningButtonWithSnack = () => {
+  const handleShorteningButtonWithSnack = useCallback(() => {
     handleShorteningButton();
-    handleSnackbarOpen("[順刻] 起動メア60秒減少。", "info");
-  }
+  }, []);
 
-  const handleMinusButtonWithSnack = () => {
+  const handleMinusButtonWithSnack = useCallback(() => {
     handleMinusButton();
-    handleSnackbarOpen("-1秒しました。", "success");
-  }
+  }, []);
 
-  const handleClearButtonWithSnack = () => {
+  const handleClearButtonWithSnack = useCallback(() => {
     handleClearButton();
-    handleSnackbarOpen("クリアしました。", "success");
-  }
+  }, []);
 
   return(
     <div tw='p-2'>
@@ -172,72 +208,13 @@ const TimerSettingTable = React.memo((props: timerSettingTableProps) => {
           </button>
         </div>
         <div>
-          <div tw='flex justify-between p-2 lg:px-16'>
-            <div tw='flex'>
-              <div tw='flex flex-col'>
-                <button
-                  tw='relative w-16 h-16 items-center rounded-full p-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-focus active:bg-active disabled:bg-disabled focus:outline-none focus-visible:ring overflow-hidden'
-                  id='res-restart'
-                  aria-label='逆刻'
-                  onClick={() => handleRestartButtonWithSnack()}
-                  disabled={optButtonDisabled}
-                >
-                  <div tw='absolute -top-2 -left-2 w-20 h-20 -z-1'>
-                    <AnyImage filename='cards/CardS6416.png' />
-                  </div>
-                </button>
-                <label
-                  htmlFor='res-restart'
-                  tw='w-full text-sm text-center cursor-pointer overflow-hidden'
-                >
-                  ロボンゴ
-                </label>
-              </div>
-              <div tw='flex flex-col'>
-                <button
-                  tw='relative w-16 h-16 items-center rounded-full p-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-focus active:bg-active disabled:bg-disabled focus:outline-none focus-visible:ring overflow-hidden'
-                  id='res-shortening'
-                  aria-label='順刻'
-                  onClick={() => handleShorteningButtonWithSnack()}
-                  disabled={optButtonDisabled}
-                >
-                  <div tw='absolute -top-2 -left-2 w-20 h-20 -z-1'>
-                    <AnyImage filename='cards/CardS2672.png' />
-                  </div>
-                </button>
-                <label
-                  htmlFor='res-shortening'
-                  tw='w-full text-sm text-center cursor-pointer overflow-hidden'
-                >
-                  ガリア
-                </label>
-              </div>
-              <div tw='flex flex-col'>
-                <button
-                  tw='w-16 h-16 items-center bg-emerald-500 text-white rounded-full px-2 py-1 sm:px-4 sm:py-2 ml-1 sm:m-2 transition ease select-none hover:bg-emerald-700 disabled:bg-gray-400 focus:outline-none focus-visible:ring'
-                  id='res-minus'
-                  aria-label='-1秒'
-                  onClick={() => handleMinusButtonWithSnack()}
-                  disabled={optButtonDisabled}
-                >
-                  <span tw='block text-center'>-1</span>
-                </button>
-                <label
-                  htmlFor='res-minus'
-                  tw='w-full text-sm text-center cursor-pointer overflow-hidden'
-                >
-                  微調整
-                </label>
-              </div>
-            </div>
-            <button
-              tw='flex h-16 items-center bg-rose-600 text-white rounded-md px-4 py-1 sm:px-4 sm:py-2 sm:m-2 transition ease select-none hover:bg-rose-800 focus:outline-none focus-visible:ring'
-              onClick={() => handleClearButtonWithSnack()}
-            >
-              <Trash />
-              <span tw='sm:block hidden'>クリア</span>
-            </button>
-          </div>
+          <OptionComponent
+            optButtonDisabled={optButtonDisabled}
+            handleRestartButtonWithSnack={handleRestartButtonWithSnack}
+            handleShorteningButtonWithSnack={handleShorteningButtonWithSnack}
+            handleMinusButtonWithSnack={handleMinusButtonWithSnack}
+            handleClearButtonWithSnack={handleClearButtonWithSnack}
+          />
         </div>
         <div>
           <NightmareTabs handleNightmareButton={handleNightmareButton} />
@@ -246,5 +223,32 @@ const TimerSettingTable = React.memo((props: timerSettingTableProps) => {
     </div>
   );
 });
+
+const NightmareTabsComponent: React.FCX<{
+  history: historyProps[];
+  setHistory: React.Dispatch<React.SetStateAction<historyProps[]>>;
+  handleNightmareButton: (e: React.MouseEvent<HTMLElement>) => void;
+}> = ({ history, setHistory, handleNightmareButton }) => {
+  const { isMobile } = MediaMobile.useContainer();
+  if (isMobile) {
+    return (
+      <div>
+        {/* Tab */}
+        <NightmareTabs handleNightmareButton={handleNightmareButton} />
+
+        <div tw='w-max mx-6'>
+          <TimerHistoryTable
+            history={history}
+            setHistory={setHistory}
+          />
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <NightmareTabs handleNightmareButton={handleNightmareButton} />
+    );
+  }
+};
   
 export default TimerSettingTable;
