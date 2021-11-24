@@ -145,6 +145,13 @@ const NightmareTabs = React.memo((props: nightmareTabsProps) => {
           css={value === 6 && tw`opacity-100`}
           onClick={(e) => handleChange(e, 6)}
         >
+          WGC
+        </TabButton>
+        <TabButton
+          id='vertical-tab-7'
+          css={value === 7 && tw`opacity-100`}
+          onClick={(e) => handleChange(e, 7)}
+        >
           カスタム
         </TabButton>
         <HighlightBar css={css`top: calc(5rem * ${value})`}></HighlightBar>
@@ -287,8 +294,67 @@ const NightmareTabs = React.memo((props: nightmareTabsProps) => {
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1497' />
         </div>
       </TabPanel>
-        {/* カスタム */}
+        {/* WGC */}
       <TabPanel value={value} index={6}>
+        <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='458' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='517' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='480' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5048' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6129' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='4615' />
+        </div>
+        <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1882' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1593' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1431' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='4854' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5018' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5244' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6678' />
+        </div>
+        <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='556' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='640' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1052' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1441' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1591' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5609' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1417' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1126' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1316' />
+        </div>
+        <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='3742' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5709' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='4050' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='3836' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1010' />
+        </div>
+        <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6416' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='2523' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='2672' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5975' />
+        </div>        
+        <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='3140' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6065' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7190' />
+          <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6903' />
+        </div>
+      </TabPanel>
+        {/* カスタム */}
+      <TabPanel value={value} index={7}>
         <div tw='flex flex-wrap'>
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7895' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='458' />
