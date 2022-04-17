@@ -32,7 +32,7 @@ const TimerButtonIcon: React.FCX<{
   handleNightmareButton: (e: React.MouseEvent<HTMLElement>) => void,
  }> = React.memo(({ id, handleNightmareButton }) => {
   const nightmareData = useDataNightmare();
-  const imageId = id.length < 5 ? ('0000' + id).slice(-4) : id;
+  const imageId = [...id].length < 5 ? ('0000' + id).slice(-4) : id;
 
   const result = nightmareData.filter((item: nightmareProps) => {
     return item.icon.indexOf(id) !== -1;

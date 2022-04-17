@@ -154,7 +154,7 @@ module.exports = {
         transparent: 'transparent',
         current: 'currentColor',
         emerald: colors.emerald,
-        lightblue: colors.lightBlue,
+        lightblue: colors.sky,
         rose: colors.rose,
       },
       lineHeight: {

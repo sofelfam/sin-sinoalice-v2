@@ -55,7 +55,7 @@ interface timerTableProps {
 
 const TimerTable = React.memo((props: timerTableProps) => {
   const { zoom, coloCountText, coloMareId, coloMareStartTime, coloMareEndTime } = props;
-  const imageId = coloMareId.length < 5 ? ('0000' + coloMareId).slice(-4) : coloMareId;
+  const imageId = [...coloMareId].length < 5 ? ('0000' + coloMareId).slice(-4) : coloMareId;
 
   return(
     <div css={classes.timerDisplayTable}>
