@@ -32,7 +32,7 @@ const TimerButtonIcon: React.FCX<{
   handleNightmareButton: (e: React.MouseEvent<HTMLElement>) => void,
  }> = React.memo(({ id, handleNightmareButton }) => {
   const nightmareData = useDataNightmare();
-  const imageId = ('0000' + id).slice(-4);
+  const imageId = id.length < 5 ? ('0000' + id).slice(-4) : id;
 
   const result = nightmareData.filter((item: nightmareProps) => {
     return item.icon.indexOf(id) !== -1;
@@ -367,13 +367,12 @@ const NightmareTabs = React.memo((props: nightmareTabsProps) => {
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='4615' />
         </div>
         <div tw='flex flex-wrap'>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='10889' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7742' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7724' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='11349' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7928' />
-          <span tw='w-1'></span>
-          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1882' />
-          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1593' />
-          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1431' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='9701' />
           <span tw='w-1'></span>
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6678' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7893' />
@@ -388,7 +387,9 @@ const NightmareTabs = React.memo((props: nightmareTabsProps) => {
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='8332' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='5709' />
           <span tw='w-1'></span>
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='10893' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='4050' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='11351' />
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='3836' />
           <span tw='w-1'></span>
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='1010' />
@@ -410,7 +411,7 @@ const NightmareTabs = React.memo((props: nightmareTabsProps) => {
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7190' />
           <span tw='w-1'></span>
           <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='6903' />
-          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='7615' />
+          <TimerButtonIcon handleNightmareButton={handleNightmareButton} id='10891' />
         </div>
       </TabPanel>
     </div>
